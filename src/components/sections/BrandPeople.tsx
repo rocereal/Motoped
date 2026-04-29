@@ -21,6 +21,25 @@ const testimonials = [
   },
 ]
 
+const btnStyle: React.CSSProperties = {
+  background: 'transparent',
+  border: '2px solid rgba(255,255,255,0.7)',
+  borderRadius: '50%',
+  width: 48,
+  height: 48,
+  minWidth: 48,
+  minHeight: 48,
+  boxSizing: 'border-box',
+  padding: 0,
+  color: '#fff',
+  fontSize: 18,
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexShrink: 0,
+}
+
 export default function BrandPeople() {
   const swiperRef = useRef<SwiperType | null>(null)
 
@@ -62,8 +81,32 @@ export default function BrandPeople() {
                   {testimonials.map((t, i) => (
                     <SwiperSlide key={i}>
                       <div className="testimonial-item">
-                        <div className="person-img" style={{ position: 'relative' }}>
-                          <img src={t.img} alt={t.name} />
+                        {/* Wrapper with position:relative so the quote icon escapes overflow:hidden on .person-img */}
+                        <div style={{ position: 'relative', flex: '0 0 350px', maxWidth: 350 }}>
+                          <div className="person-img">
+                            <img src={t.img} alt={t.name} />
+                          </div>
+                          <i
+                            className="fas fa-quote-left"
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              zIndex: 2,
+                              background: '#fff',
+                              color: '#000',
+                              width: 90,
+                              height: 90,
+                              borderRadius: '50%',
+                              fontSize: 45,
+                              lineHeight: '48px',
+                              padding: 20,
+                              boxSizing: 'border-box',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          />
                         </div>
                         <div className="quote-text">
                           <blockquote>{t.quote}</blockquote>
@@ -81,6 +124,7 @@ export default function BrandPeople() {
               <div className="owl-nav">
                 <button
                   className="owl-prev"
+                  style={btnStyle}
                   onClick={() => swiperRef.current?.slidePrev()}
                   aria-label="Anterior"
                 >
@@ -88,6 +132,7 @@ export default function BrandPeople() {
                 </button>
                 <button
                   className="owl-next"
+                  style={btnStyle}
                   onClick={() => swiperRef.current?.slideNext()}
                   aria-label="Următor"
                 >
