@@ -1,0 +1,28 @@
+/* Swiper */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+/* Custom overrides for React components */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Swiper integration with template styles */
+.swiper-color-variation {
+  width: 100%;
+}
+
+.swiper-capability {
+  width: 100%;
+}
+
+/* Tab active state */
+.nav-link {
+  cursor: pointer;
+}
+
+/* Mobile menu overlay */
+.menu-open .site-navigation {
+  display: block !important;
+}

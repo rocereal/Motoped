@@ -1,0 +1,62 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [sticky, setSticky] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setSticky(window.scrollY > 80)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  return (
+    <header
+      className={`main-header menu-absolute transparent light-header${sticky ? ' sticky' : ''}`}
+    >
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-3 logo">
+            <a href="#top" onClick={(e) => handleNavClick(e, 'top')} title="Wheels Motorcycle">
+              <img src="/images/motorcycle-logo.png" alt="motorcycle" className="regular-logo" />
+              <img src="/images/motorcycle-dark-logo.png" alt="motorcycle" className="sticky-logo" />
+            </a>
+            <div
+              className={`menu-icon${menuOpen ? ' open' : ''}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className="top"></span>
+              <span className="middle"></span>
+              <span className="bottom"></span>
+            </div>
+          </div>
+          <div className={`col-sm-9 menu-conainer${menuOpen ? ' menu-open' : ''}`}>
+            <nav className="site-navigation">
+              <ul className="main-menu">
+                <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')}>About</a></li>
+                <li><a href="#feature" onClick={(e) => handleNavClick(e, 'feature')}>Features</a></li>
+                <li><a href="#variation" onClick={(e) => handleNavClick(e, 'variation')}>Variations</a></li>
+                <li><a href="#capability" onClick={(e) => handleNavClick(e, 'capability')}>Specials</a></li>
+                <li><a href="#technical" onClick={(e) => handleNavClick(e, 'technical')}>Technical Specs</a></li>
+                <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Find Dealer</a></li>
+              </ul>
+              <ul className="header-social-media">
+                <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i className="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i className="fab fa-youtube"></i></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}
