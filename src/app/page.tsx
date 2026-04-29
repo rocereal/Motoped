@@ -9,7 +9,6 @@ import EnvironmentalImpacts from '@/components/sections/EnvironmentalImpacts'
 import TechnicalSpecifications from '@/components/sections/TechnicalSpecifications'
 import BrandPeople from '@/components/sections/BrandPeople'
 import DealerFinder from '@/components/sections/DealerFinder'
-import Contact from '@/components/sections/Contact'
 
 export default function Home() {
   return (
@@ -26,7 +25,6 @@ export default function Home() {
           <TechnicalSpecifications />
           <BrandPeople />
           <DealerFinder />
-          <Contact />
         </div>
         <Footer />
       </div>
