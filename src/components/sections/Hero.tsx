@@ -1,25 +1,4 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
-
 export default function Hero() {
-  const progressRef = useRef<HTMLDivElement>(null)
-  const valueRef = useRef<HTMLSpanElement>(null)
-
-  useEffect(() => {
-    let value = 0
-    const end = 100
-    const speed = 100
-    const timer = setInterval(() => {
-      value++
-      if (valueRef.current) valueRef.current.textContent = `${value}%`
-      if (progressRef.current) {
-        progressRef.current.style.background = `conic-gradient(#248C46 ${value * 3.6}deg, #ededed 0deg)`
-      }
-      if (value === end) clearInterval(timer)
-    }, speed)
-    return () => clearInterval(timer)
-  }, [])
 
   return (
     <section
@@ -62,9 +41,6 @@ export default function Hero() {
           </div>
           <div className="col-lg-7 col-12 px-0">
             <div className="container1 d-none d-lg-block">
-              <div className="circular-progress" ref={progressRef}>
-                <span className="progress-value" ref={valueRef}>0%</span>
-              </div>
               <div className="hero-img">
                 <img src="/images/nieve-red-side.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
               </div>
