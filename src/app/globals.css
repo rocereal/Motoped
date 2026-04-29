@@ -28,25 +28,29 @@ html {
 }
 
 /* Logo responsive sizing — overrides template's .logo img { max-height: 48px } */
-.main-header .logo img,
-.main-header .logo .logo-img {
+.main-header .logo img {
   max-height: 170px !important;
 }
 @media (min-width: 768px) {
-  .main-header .logo img,
-  .main-header .logo .logo-img {
+  .main-header .logo img {
     max-height: 200px !important;
   }
 }
 
-/* Header row vertical alignment */
-.main-header .row {
-  align-items: center;
+/* Remove template padding that creates empty space above header content */
+.main-header .logo {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Logo column: flex so logo + hamburger are vertically centered */
-.main-header .col-sm-3.logo {
-  display: flex;
+/* Header row: center logo column vertically with nav column */
+.main-header .row {
   align-items: center;
-  justify-content: space-between;
+  min-height: 80px;
+}
+
+/* Center hamburger vertically with logo on mobile */
+.main-header .menu-icon {
+  top: 50% !important;
+  transform: translateY(-50%);
 }
