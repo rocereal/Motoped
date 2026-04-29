@@ -26,3 +26,25 @@ html {
 .menu-open .site-navigation {
   display: block !important;
 }
+
+/* Logo responsive sizing */
+.logo-img {
+  max-height: 170px;
+}
+@media (min-width: 768px) {
+  .logo-img {
+    max-height: 200px;
+  }
+}
+
+/* Header row vertical alignment */
+.main-header .row {
+  align-items: center;
+}
+
+/* Logo column: flex so logo + hamburger are vertically centered */
+.main-header .col-sm-3.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
