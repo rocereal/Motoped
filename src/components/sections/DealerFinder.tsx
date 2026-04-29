@@ -51,7 +51,7 @@ export default function DealerFinder() {
           <div className="col-lg-7 col-12">
             <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', height: 380 }}>
               <iframe
-                src="https://maps.google.com/maps?q=Soseaua+Sibiului+296+Sibiu+Romania&output=embed"
+                src="https://maps.google.com/maps?q=Intersectia+DN7+DN1+557260+Vestem+Romania&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, display: 'block' }}
