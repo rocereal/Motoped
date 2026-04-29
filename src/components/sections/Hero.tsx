@@ -28,10 +28,10 @@ export default function Hero() {
       style={{
         position: 'relative',
         height: '100%',
-        backgroundColor: 'black',
-        backgroundImage: "url('/images/bg-5.jpg')",
+        backgroundColor: '#000',
+        backgroundImage: "url('/images/bg-11.jpg')",
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
+        backgroundPosition: 'center center',
         backgroundSize: 'cover',
       }}
     >
