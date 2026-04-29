@@ -71,8 +71,10 @@ export default function Hero() {
                 <img src="/images/charging-image.webp" alt="charging" className="img-fluid" />
               </span>
             </div>
-            <div className="d-block d-lg-none" style={{ textAlign: 'center', padding: '20px 0' }}>
-              <img src="/images/hero-bike.webp" alt="SS-100 E-Bike" className="img-fluid" style={{ maxHeight: 280 }} />
+            <div className="container1 d-block d-lg-none">
+              <div className="hero-img">
+                <img src="/images/hero-bike.webp" alt="SS-100 E-Bike" className="img-fluid" />
+              </div>
             </div>
           </div>
         </div>
