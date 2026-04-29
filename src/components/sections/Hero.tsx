@@ -66,12 +66,12 @@ export default function Hero() {
                 <span className="progress-value" ref={valueRef}>0%</span>
               </div>
               <div className="hero-img">
-                <img src="/images/nieve-red-front.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
+                <img src="/images/nieve-red-side.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
               </div>
             </div>
             <div className="container1 d-block d-lg-none">
               <div className="hero-img">
-                <img src="/images/nieve-red-front.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
+                <img src="/images/nieve-red-side.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
               </div>
             </div>
           </div>
