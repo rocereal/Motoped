@@ -1,36 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperType } from 'swiper'
 
 const testimonials = [
   {
-    img: '/images/nieve-front-45.png',
+    img: '/images/person-1.jpg',
     quote:
       'NIEVE Q-EN este exact ce aveam nevoie pentru deplasările zilnice prin Sibiu. Consum zero, parcare ușoară și nu mai plătesc combustibil. O investiție care s-a amortizat rapid!',
     name: 'Andrei Popescu',
     role: 'Antreprenor, Sibiu',
   },
   {
-    img: '/images/nieve-interior-dashboard.png',
+    img: '/images/person-2.jpg',
     quote:
       'Am testat-o o săptămână înainte de a o cumpăra. Sunt surprins de cât de silențioasă și ușor de condus este. Bateria LiFePO4 îmi dă 100+ km pe o singură încărcare — mai mult decât am nevoie.',
     name: 'Maria Ionescu',
     role: 'Medic, Sibiu',
   },
-  {
-    img: '/images/nieve-front-led.png',
-    quote:
-      'Dealer-ul din Sibiu a fost foarte profesionist. Mi-au explicat totul despre mașină, documentație și au asigurat service rapid. Recomand cu încredere NIEVE Q-EN pentru oricine vrea mobilitate urbană inteligentă.',
-    name: 'Cristian Moldovan',
-    role: 'IT Manager, Sibiu',
-  },
 ]
 
 export default function BrandPeople() {
-  const [active, setActive] = useState(0)
-
-  const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length)
-  const next = () => setActive((a) => (a + 1) % testimonials.length)
+  const swiperRef = useRef<SwiperType | null>(null)
 
   return (
     <section id="testimonials" className="testimonial-section racing-car light-text">
@@ -45,7 +37,7 @@ export default function BrandPeople() {
               backgroundSize: 'cover',
             }}
           />
-          <div className="overlay-bg" style={{ backgroundColor: '#dd0606', opacity: 0.88 }} />
+          <div className="overlay-bg" style={{ backgroundColor: '#dd0606', opacity: 0.85 }} />
         </div>
       </div>
 
@@ -61,37 +53,44 @@ export default function BrandPeople() {
           </div>
 
           <div className="col-md-12">
-            <div className="testimonial-wrapper" style={{ position: 'relative' }}>
+            <div className="testimonial-wrapper">
               <div className="testimonial-slider">
-                {testimonials.map((t, i) => (
-                  <div
-                    key={i}
-                    className="testimonial-item"
-                    style={{ display: i === active ? 'flex' : 'none' }}
-                  >
-                    <div className="person-img" style={{ position: 'relative' }}>
-                      <img
-                        src={t.img}
-                        alt={t.name}
-                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                      />
-                    </div>
-                    <div className="quote-text">
-                      <blockquote>{t.quote}</blockquote>
-                      <div className="quote-details">
-                        <h3 className="person-name">{t.name}</h3>
-                        <span>{t.role}</span>
+                <Swiper
+                  loop={true}
+                  onSwiper={(swiper) => { swiperRef.current = swiper }}
+                >
+                  {testimonials.map((t, i) => (
+                    <SwiperSlide key={i}>
+                      <div className="testimonial-item">
+                        <div className="person-img" style={{ position: 'relative' }}>
+                          <img src={t.img} alt={t.name} />
+                        </div>
+                        <div className="quote-text">
+                          <blockquote>{t.quote}</blockquote>
+                          <div className="quote-details">
+                            <h3 className="person-name">{t.name}</h3>
+                            <span>{t.role}</span>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
 
               <div className="owl-nav">
-                <button onClick={prev} className="owl-prev" aria-label="Anterior">
+                <button
+                  className="owl-prev"
+                  onClick={() => swiperRef.current?.slidePrev()}
+                  aria-label="Anterior"
+                >
                   <i className="fas fa-chevron-left" />
                 </button>
-                <button onClick={next} className="owl-next" aria-label="Următor">
+                <button
+                  className="owl-next"
+                  onClick={() => swiperRef.current?.slideNext()}
+                  aria-label="Următor"
+                >
                   <i className="fas fa-chevron-right" />
                 </button>
               </div>
