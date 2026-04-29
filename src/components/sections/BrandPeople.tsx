@@ -121,7 +121,7 @@ export default function BrandPeople() {
                 </Swiper>
               </div>
 
-              <div className="owl-nav">
+              <div className="owl-nav" style={{ display: 'flex', gap: 10 }}>
                 <button
                   className="owl-prev"
                   style={btnStyle}

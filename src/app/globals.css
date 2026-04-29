@@ -27,6 +27,16 @@ html {
   display: block !important;
 }
 
+/* Testimonial nav buttons — remove Bootstrap active/focus color */
+.owl-nav button:focus,
+.owl-nav button:active,
+.owl-nav button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: inherit !important;
+}
+
 /* Show nav-tabs when dropdown is open on mobile */
 @media (max-width: 767px) {
   .tab-section.nav-open .nav-tabs,
