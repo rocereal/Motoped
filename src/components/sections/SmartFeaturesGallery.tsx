@@ -118,6 +118,7 @@ export default function SmartFeaturesGallery() {
                     key={tab.id}
                     className={`tab-pane${i === activeTab ? ' active' : ''}`}
                     role="tabpanel"
+                    style={{ display: i === activeTab ? 'block' : 'none' }}
                   >
                     <ul className={`st-gallery column-${tab.images.length === 2 ? '2' : '3'}`}>
                       {tab.images.map((img, imgIdx) => (

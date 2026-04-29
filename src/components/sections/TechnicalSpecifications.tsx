@@ -152,6 +152,7 @@ export default function TechnicalSpecifications() {
                     key={tab.id}
                     className={`tab-pane${i === activeTab ? ' active' : ''}`}
                     role="tabpanel"
+                    style={{ display: i === activeTab ? 'block' : 'none' }}
                   >
                     <h3 className="tab-title">{tab.title}</h3>
                     <table className="specifications">
