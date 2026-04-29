@@ -27,3 +27,13 @@ html {
   display: block !important;
 }
 
+/* Logo size */
+.main-header .logo img {
+  max-height: 35px !important;
+}
+@media (min-width: 768px) {
+  .main-header .logo img {
+    max-height: 40px !important;
+  }
+}
+
