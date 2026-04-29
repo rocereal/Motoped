@@ -50,10 +50,12 @@ export default function SmartFeaturesGallery() {
     setLightboxOpen(true)
   }
 
-  const selectTab = (i: number) => {
+  const selectTab = (i: number, e: React.MouseEvent) => {
+    e.stopPropagation()
     setActiveTab(i)
     setNavOpen(false)
     setLightboxOpen(false)
+    setLightboxIndex(0)
   }
 
   const currentSlides = tabs[activeTab].images.map((img) => ({
@@ -91,13 +93,13 @@ export default function SmartFeaturesGallery() {
               </div>
 
               {/* Nav tabs */}
-              <ul className="nav nav-tabs text-uppercase" role="tablist">
+              <ul className="nav nav-tabs text-uppercase" role="tablist" onClick={(e) => e.stopPropagation()}>
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
-                      onClick={() => selectTab(i)}
+                      onClick={(e) => selectTab(i, e)}
                     >
                       {tab.label}
                     </span>
@@ -118,16 +120,16 @@ export default function SmartFeaturesGallery() {
                     <ul className={`st-gallery column-${tab.columns}`}>
                       {tab.images.map((img, imgIdx) => (
                         <li key={img.src}>
-                          <a
-                            href={img.src}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              openLightbox(imgIdx)
-                            }}
+                          <div
+                            role="button"
+                            tabIndex={0}
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => openLightbox(imgIdx)}
+                            onKeyDown={(e) => e.key === 'Enter' && openLightbox(imgIdx)}
                           >
                             <img src={img.src} alt={img.caption} />
                             <span className="caption-text">{img.caption}</span>
-                          </a>
+                          </div>
                         </li>
                       ))}
                     </ul>
