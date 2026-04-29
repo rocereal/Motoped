@@ -26,8 +26,8 @@ export default function Header() {
         <div className="row">
           <div className="col-sm-3 logo">
             <a href="#top" onClick={(e) => handleNavClick(e, 'top')} title="Motoped.ro - NIEVE Q-EN">
-              <img src="/images/e-bike-logo-white.png" alt="Motoped.ro" className="regular-logo img-fluid" />
-              <img src="/images/e-bike-logo-dark.png" alt="Motoped.ro" className="sticky-logo img-fluid" />
+              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="regular-logo img-fluid" />
+              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="sticky-logo img-fluid" />
             </a>
             <div
               className={`menu-icon${menuOpen ? ' open' : ''}`}
