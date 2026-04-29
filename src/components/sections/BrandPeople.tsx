@@ -13,7 +13,7 @@ const testimonials = [
     role: 'Antreprenor, Sibiu',
   },
   {
-    img: '/images/person-2.jpg',
+    img: '/images/person-1.jpg',
     quote:
       'Am testat-o o săptămână înainte de a o cumpăra. Sunt surprins de cât de silențioasă și ușor de condus este. Bateria LiFePO4 îmi dă 100+ km pe o singură încărcare — mai mult decât am nevoie.',
     name: 'Maria Ionescu',
