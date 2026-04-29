@@ -112,7 +112,9 @@ export default function Features() {
               </h2>
             </div>
           </div>
-          <div className="col-lg-12 col-12 mb-lg-5" style={{ display: 'flex', justifyContent: 'end' }}>
+
+          {/* Desktop: spinning circle (lg+) */}
+          <div className="col-lg-12 col-12 mb-lg-5 d-none d-lg-flex" style={{ justifyContent: 'end' }}>
             <div className="services">
               <div>
                 <div className="circle--slider">
@@ -161,9 +163,6 @@ export default function Features() {
                               <div className="animate-more">
                                 <div className="animate-title">
                                   <div className="p-center sm-image">
-                                    <span className="d-block d-lg-none d-md-none">
-                                      <img src={f.icon} alt="" className="mb-3 img-fluid" />
-                                    </span>
                                     <p className="mb-0 text-dark font-w-600">{f.label}</p>
                                     <p className="feature-font text-dark">{f.text}</p>
                                   </div>
@@ -179,6 +178,56 @@ export default function Features() {
               </div>
             </div>
           </div>
+
+          {/* Mobile: simple card layout (below lg) */}
+          <div className="col-12 d-block d-lg-none pb-5">
+            <div style={{ maxWidth: 480, margin: '0 auto' }}>
+              <div
+                style={{
+                  background: '#1a1a1a',
+                  borderRadius: 16,
+                  padding: '32px 24px',
+                  textAlign: 'center',
+                  minHeight: 260,
+                }}
+              >
+                <div style={{ marginBottom: 20 }}>
+                  <img
+                    src={features[activeIndex].icon}
+                    alt={features[activeIndex].label}
+                    style={{ width: 64, height: 64 }}
+                  />
+                </div>
+                <p style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 10, fontFamily: "'Poppins', sans-serif" }}>
+                  {features[activeIndex].label}
+                </p>
+                <p style={{ color: '#ccc', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+                  {features[activeIndex].text}
+                </p>
+              </div>
+
+              {/* Dot navigation */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 20 }}>
+                {features.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setActiveIndex(i); setDeg(i * STEP); }}
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: '50%',
+                      border: 'none',
+                      padding: 0,
+                      background: i === activeIndex ? '#DD0707' : '#555',
+                      cursor: 'pointer',
+                      transition: 'background 0.3s',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
