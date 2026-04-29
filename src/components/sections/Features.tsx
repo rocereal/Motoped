@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const features = [
   {
@@ -13,21 +13,21 @@ const features = [
   {
     icon: '/images/plug.png',
     label: 'Quick Charging',
-    text: "The good thing about electric bikes is that they can last a wide range, around 35 to 100 miles, before the battery running out. If there is still some charge when you plug it in, then it may take less time. Furthermore, if you're not a big fan of charging your electric bikes.",
+    text: "The good thing about electric bikes is that they can last a wide range, around 35 to 100 miles, before the battery running out. If there is still some charge when you plug it in, then it may take less time.",
     blockClass: 'block2',
     iconClass: 'icon icon2',
   },
   {
     icon: '/images/eco-energy.png',
     label: 'Eco-Friendly',
-    text: 'The average gasoline-driven car has a fuel economy of 22 miles and drives around 11,500 miles annually. Working with these figures, they concluded that each car would produce 8887 grams of carbon dioxide each year.',
+    text: 'The average gasoline-driven car has a fuel economy of 22 miles and drives around 11,500 miles annually. Working with these figures, each car would produce 8887 grams of carbon dioxide each year.',
     blockClass: 'block3',
     iconClass: 'icon icon3',
   },
   {
     icon: '/images/weight.png',
     label: 'Weight',
-    text: 'Their engineering compensates for the weight by clever designs that feel like the extra pounds have disappeared when you start to pedal. Along with that, features such as the pedal-assist or motor do most of the heavy-duty work so you can enjoy a smooth ride.',
+    text: 'Their engineering compensates for the weight by clever designs that feel like the extra pounds have disappeared when you start to pedal. The pedal-assist or motor does most of the heavy-duty work so you can enjoy a smooth ride.',
     blockClass: 'block4',
     iconClass: 'icon icon4',
   },
@@ -47,18 +47,36 @@ const features = [
   },
 ]
 
+// CSS .count6 li:nth-child(N) rotations (0-based index)
+const LI_ROTATIONS = [0, 60, 120, 180, 240, -60]
+
 const STEP = -60 // 360 / 6 items
 
 export default function Features() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [deg, setDeg] = useState(0)
+  const circleRef = useRef<HTMLUListElement>(null)
+
+  // Replicate jQuery's autoHeightCircle() — make the circle square
+  useEffect(() => {
+    const setSquare = () => {
+      const el = circleRef.current
+      if (!el) return
+      const w = el.offsetWidth
+      el.style.height = w + 'px'
+      const wrapper = el.nextElementSibling as HTMLElement | null
+      if (wrapper) wrapper.style.height = wrapper.offsetWidth + 'px'
+    }
+    setSquare()
+    window.addEventListener('resize', setSquare)
+    return () => window.removeEventListener('resize', setSquare)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => {
-        const next = (prev + 1) % features.length
         setDeg((d) => d + STEP)
-        return next
+        return (prev + 1) % features.length
       })
     }, 1500)
     return () => clearInterval(timer)
@@ -104,6 +122,7 @@ export default function Features() {
                   <div className="rotate--circle">
                     <ul
                       className="circle--rotate count6"
+                      ref={circleRef}
                       style={{
                         transform: `rotate(${deg}deg)`,
                         WebkitTransform: `rotate(${deg}deg)`,
@@ -111,14 +130,26 @@ export default function Features() {
                       }}
                     >
                       {features.map((f, i) => (
-                        <li key={f.label} className={`${f.blockClass}${i === activeIndex ? ' active' : ''}`}>
+                        <li
+                          key={f.label}
+                          className={`${f.blockClass}${i === activeIndex ? ' active' : ''}`}
+                        >
                           <div
                             className={f.iconClass}
                             onClick={() => handleIconClick(i)}
                             style={{ cursor: 'pointer' }}
                           >
-                            <img src={f.icon} alt={f.label} className="img-fluid" />
-                            <p className="icon-text">{f.label}</p>
+                            {/* counter-rotate inner content so labels stay upright */}
+                            <span
+                              style={{
+                                display: 'block',
+                                transform: `rotate(${-(LI_ROTATIONS[i] + deg)}deg)`,
+                                WebkitTransform: `rotate(${-(LI_ROTATIONS[i] + deg)}deg)`,
+                              }}
+                            >
+                              <img src={f.icon} alt={f.label} className="img-fluid" />
+                              <p className="icon-text">{f.label}</p>
+                            </span>
                           </div>
                         </li>
                       ))}
