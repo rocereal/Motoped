@@ -4,60 +4,57 @@ import { useState, useEffect, useRef } from 'react'
 
 const features = [
   {
-    icon: '/images/efficient.png',
-    label: 'Efficient Motor',
-    text: 'What defines an electric bike from a conventional bicycle is its motor. An electric bike motor should deliver power and value. Hence, whether you are using it to commute to work, or you want to ride rough terrain or climb hills, it should let you do so effortlessly.',
+    icon: '/images/svg/motor.svg',
+    label: 'Motor Electric',
+    text: 'Motorul electric de 3100W (putere maximă 5100W) asigură un cuplu excelent de la pornire. Urci pante de până la 21% fără efort, cu o accelerație liniară și silențioasă, ideală pentru traficul urban.',
     blockClass: 'block1',
     iconClass: 'icon icon1',
   },
   {
-    icon: '/images/plug.png',
-    label: 'Quick Charging',
-    text: "The good thing about electric bikes is that they can last a wide range, around 35 to 100 miles, before the battery running out. If there is still some charge when you plug it in, then it may take less time.",
+    icon: '/images/svg/battery.svg',
+    label: 'Baterie LiFePO4',
+    text: 'Bateria LiFePO4 de 64V 100Ah oferă siguranță superioară, durată lungă de viață și stabilitate termică excelentă. Tehnologia fosfat de fier-litiu rezistă la mai multe cicluri de încărcare față de bateriile convenționale.',
     blockClass: 'block2',
     iconClass: 'icon icon2',
   },
   {
-    icon: '/images/eco-energy.png',
-    label: 'Eco-Friendly',
-    text: 'The average gasoline-driven car has a fuel economy of 22 miles and drives around 11,500 miles annually. Working with these figures, each car would produce 8887 grams of carbon dioxide each year.',
+    icon: '/images/svg/range.svg',
+    label: 'Autonomie 90-120 km',
+    text: 'O singură încărcare îți oferă între 90 și 120 km de autonomie, suficient pentru deplasările zilnice în oraș și în împrejurimi. Poți pleca dimineața cu bateria plină și ajungi acasă cu rezervă.',
     blockClass: 'block3',
     iconClass: 'icon icon3',
   },
   {
-    icon: '/images/weight.png',
-    label: 'Weight',
-    text: 'Their engineering compensates for the weight by clever designs that feel like the extra pounds have disappeared when you start to pedal. The pedal-assist or motor does most of the heavy-duty work so you can enjoy a smooth ride.',
+    icon: '/images/svg/charging.svg',
+    label: 'Încărcare Simplă',
+    text: 'Timpul de încărcare completă este de 5-7 ore, compatibil cu orice priză standard. Poți încărca acasă peste noapte sau la orice stație publică de încărcare, fără echipamente speciale.',
     blockClass: 'block4',
     iconClass: 'icon icon4',
   },
   {
-    icon: '/images/pedal.png',
-    label: 'Pedaling',
-    text: 'These bikes are so popular because they feel like conventional bikes while providing the superior experience of electric bikes. You are essentially controlling the speed with your feet; however, you can accelerate much quicker.',
+    icon: '/images/svg/speed.svg',
+    label: 'Viteză 45 km/h',
+    text: 'Viteza maximă de 45 km/h este optimizată pentru mobilitate urbană. Ideală pentru deplasări în oraș fără nicio restricție de circulație, cu costuri de asigurare și întreținere semnificativ mai mici.',
     blockClass: 'block5',
     iconClass: 'icon icon5',
   },
   {
-    icon: '/images/sync.png',
-    label: 'Smartphone Integration',
-    text: "You can easily connect your electric bike wirelessly with smartphones to include app capabilities like GPS, health tracking, and maps. Other apps may even allow you to unlock your electric bike's integrated lock system.",
+    icon: '/images/svg/connectivity.svg',
+    label: 'Conectivitate Smart',
+    text: 'Ecranul tactil de 7 inch, conectivitate Bluetooth, radio FM/AM și 2 porturi USB te țin conectat în permanență. Camera de marșarier de înaltă rezoluție și accesul prin cheie cu telecomandă completează experiența modernă.',
     blockClass: 'block6',
     iconClass: 'icon icon6',
   },
 ]
 
-// CSS .count6 li:nth-child(N) rotations (0-based index)
 const LI_ROTATIONS = [0, 60, 120, 180, 240, -60]
-
-const STEP = -60 // 360 / 6 items
+const STEP = -60
 
 export default function Features() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [deg, setDeg] = useState(0)
   const circleRef = useRef<HTMLUListElement>(null)
 
-  // Replicate jQuery's autoHeightCircle() — make the circle square
   useEffect(() => {
     const setSquare = () => {
       const el = circleRef.current
@@ -111,7 +108,7 @@ export default function Features() {
           <div className="col-lg-12 mb-lg-5">
             <div className="heading-wrapper text-center">
               <h2 className="large-heading text-uppercase" style={{ color: '#fff' }}>
-                <span>Smart</span>Features
+                <span>Caracteristici</span>Smart
               </h2>
             </div>
           </div>
@@ -139,7 +136,6 @@ export default function Features() {
                             onClick={() => handleIconClick(i)}
                             style={{ cursor: 'pointer' }}
                           >
-                            {/* counter-rotate inner content so labels stay upright */}
                             <span
                               style={{
                                 display: 'block',

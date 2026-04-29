@@ -1,48 +1,48 @@
 const impacts = [
   {
-    icon: '/images/zero-emission.png',
-    title: 'Reduced Emissions',
-    desc: "E-bikes produce zero tailpipe emissions, which means they don't release harmful pollutants or greenhouse gases directly into the atmosphere.",
+    icon: '/images/svg/zero-co2.svg',
+    title: 'Zero Emisii CO₂',
+    desc: 'NIEVE Q-EN nu produce nicio emisie de gaze de eșapament. Conduci fără să contribui la poluarea aerului și fără să adaugi CO₂ în atmosferă — o alegere responsabilă pentru tine și pentru mediu.',
   },
   {
-    icon: '/images/energy-saving.png',
-    title: 'Energy Efficiency',
-    desc: 'E-bikes are more energy-efficient than many other forms of transportation. They use relatively small amounts of electricity.',
+    icon: '/images/svg/no-fuel.svg',
+    title: 'Fără Costuri de Combustibil',
+    desc: 'Uită de prețurile în continuă creștere la carburanți. Cu NIEVE Q-EN, plătești doar electricitatea necesară încărcării — echivalentul a câțiva lei pe zi pentru deplasările tale zilnice.',
   },
   {
-    icon: '/images/traffic-light.png',
-    title: 'Reduced Traffic Congestion',
-    desc: 'E-bikes can help reduce traffic congestion in cities by providing an efficient and convenient mode of transportation.',
+    icon: '/images/svg/silent.svg',
+    title: 'Silențios & Confortabil',
+    desc: 'Motorul electric al lui Q-EN funcționează practic în tăcere. Fără zgomotul unui motor cu ardere internă, fiecare deplasare devine mai plăcută — atât pentru tine, cât și pentru comunitate.',
   },
   {
-    icon: '/images/energy.png',
-    title: 'Lower Energy Consumption',
-    desc: 'E-bikes consume less energy per mile traveled compared to electric cars or motorcycles.',
+    icon: '/images/svg/disc-brake.svg',
+    title: 'Frâne pe Disc 4 Roți',
+    desc: 'Sistemul de frânare hidraulic pe toate cele patru roți asigură o oprire sigură și controlată în orice condiții. Siguranța ta este prioritatea noastră numărul unu.',
   },
   {
-    icon: '/images/no-sound.png',
-    title: 'Reduced Noise Pollution',
-    desc: 'E-bikes are generally quieter than gas-powered vehicles, reducing noise pollution in urban areas.',
+    icon: '/images/svg/lfp-battery.svg',
+    title: 'Baterie Sigură LiFePO4',
+    desc: 'Tehnologia LiFePO4 (litiu-fier-fosfat) este considerată cea mai sigură chimie pentru baterii electrice. Stabilitate termică excelentă, risc minim de supraîncălzire și o durată de viață extinsă față de bateriile Li-ion convenționale.',
   },
   {
-    icon: '/images/lifestyles.png',
-    title: 'Promotion of Active Transportation',
-    desc: 'E-bikes encourage physical activity and outdoor recreation. They can motivate people to choose biking over car trips.',
+    icon: '/images/svg/charging-home.svg',
+    title: 'Încărcare Acasă',
+    desc: 'Nu ai nevoie de o stație specială. Conectezi Q-EN la orice priză standard 220V și în 5-7 ore ai bateria plină. Poți încărca peste noapte și dimineața ești gata de drum.',
   },
   {
-    icon: '/images/long-bettery.png',
-    title: 'Long-Lasting Batteries',
-    desc: 'Reducing waste is one way to reduce one\'s carbon footprint. One benefit of owning and riding an e-bike is that it produces little waste.',
+    icon: '/images/svg/traffic.svg',
+    title: 'Ideal pentru Trafic Urban',
+    desc: 'Dimensiunile compacte (2435 x 1192 mm) fac din Q-EN alegerea perfectă pentru traficul din oraș. Parcarea devine simplă, manevrele sunt ușoare, iar deplasările scurte sunt mai rapide ca niciodată.',
   },
   {
-    icon: '/images/peak.png',
-    title: 'Off-Peak Charging',
-    desc: 'Charging a battery means drawing power from the power grid. After a long day, one can charge their bike during off-peak hours.',
+    icon: '/images/svg/led.svg',
+    title: 'Iluminare LED Completă',
+    desc: 'Faruri LED față și spate, lumini de semnalizare integrate și lumini de ceață — o iluminare completă care crește vizibilitatea și siguranța ta pe drumuri, indiferent de condiții.',
   },
   {
-    icon: '/images/dust.png',
-    title: 'Preventing Air Pollution',
-    desc: 'Pollution is a serious problem that plagues many cities. E-bikes do not contribute to the pollution in the air.',
+    icon: '/images/svg/camera.svg',
+    title: 'Cameră Marșarier',
+    desc: 'Camera de marșarier de înaltă rezoluție îți oferă o vizibilitate perfectă în spate la fiecare manevră. Parcarea în spații înguste devine simplă și sigură, chiar și pentru șoferii mai puțin experimentați.',
   },
 ]
 
@@ -64,21 +64,18 @@ export default function EnvironmentalImpacts() {
           <div className="my-lg-5 col-lg-6 col-md-5 col-12 bicycle-img">
             <div className="heading-wrapper text-left">
               <h2 className="large-heading text-uppercase" style={{ color: '#fff' }}>
-                <span>Enviormental</span>Impacts of e-bike
+                <span>De ce să alegi</span>NIEVE Q-EN?
               </h2>
               <p style={{ color: '#fff' }} className="mb-0 pt-3">
-                E-bikes are zero-emission vehicles since they use lithium-ion
-                batteries. Riding an e-bike means you&apos;re not contributing to
-                global warming. You will emit no pollutants into the atmosphere.
-                In fact, using e-bikes will save up to 500 pounds of carbon emissions each year.
+                NIEVE Q-EN este mai mult decât o mașină electrică — este o soluție completă
+                pentru mobilitatea urbană modernă. Zero emisii, zero costuri de combustibil
+                și un impact minim asupra mediului înconjurător.
               </p>
               <br />
               <p style={{ color: '#fff' }} className="mb-0">
-                Are e-bikes eco friendly? Electric Bikes are Eco Friendly.
-                Electric bicycles do consume energy. In comparison to a moped, motorbike
-                or a car, the amount of energy used is very small, making them
-                more eco friendly choice of transport. Ebikes only use battery power
-                which can be recycled when they have reached their life span.
+                Cu o baterie LiFePO4 sigură și durabilă, frâne pe disc pe toate cele patru roți
+                și dotări smart moderne, Q-EN îți oferă toate avantajele unui vehicul electric
+                la un cost accesibil pentru fiecare zi.
               </p>
             </div>
           </div>

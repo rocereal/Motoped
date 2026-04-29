@@ -38,12 +38,13 @@ export default function Hero() {
       <div className="container double-top-padding double-bottom-padding">
         <div className="row">
           <div className="col-lg-5 col-md-12 banner-content bicycle-img">
-            <h2 className="top-sub-heading">New SS-100</h2>
-            <h1 className="large-heading"><span>Smart &amp; Connected</span>E-BIKE</h1>
+            <h2 className="top-sub-heading">NIEVE Q-EN</h2>
+            <h1 className="large-heading"><span>100% Electric</span>Micro Urban</h1>
             <div className="text-block text-lead">
               <p>
-                The most popular electric motorcycles include SS-100 ($10,000),
-                SS-130 ($10,500) and SS-200 ($12,000).
+                Mașina electrică compactă de două locuri, perfectă pentru oraș.
+                Zero emisii, zero costuri de combustibil, zero zgomot —
+                doar mobilitate modernă și accesibilă.
               </p>
             </div>
             <div className="btn-wrapper">
@@ -55,7 +56,7 @@ export default function Hero() {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
-                <span>Download brochure</span><i className="fas fa-arrow-right"></i>
+                <span>Contactează-ne</span><i className="fas fa-arrow-right"></i>
               </a>
             </div>
           </div>
@@ -65,15 +66,12 @@ export default function Hero() {
                 <span className="progress-value" ref={valueRef}>0%</span>
               </div>
               <div className="hero-img">
-                <img src="/images/hero-bike.webp" alt="SS-100 E-Bike" className="img-fluid" />
+                <img src="/images/nieve-hero.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
               </div>
-              <span className="blink">
-                <img src="/images/charging-image.webp" alt="charging" className="img-fluid" />
-              </span>
             </div>
             <div className="container1 d-block d-lg-none">
               <div className="hero-img">
-                <img src="/images/hero-bike.webp" alt="SS-100 E-Bike" className="img-fluid" />
+                <img src="/images/nieve-hero.png" alt="NIEVE Q-EN Electric Car" className="img-fluid" />
               </div>
             </div>
           </div>

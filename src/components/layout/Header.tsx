@@ -25,9 +25,9 @@ export default function Header() {
       <div className="container">
         <div className="row">
           <div className="col-sm-3 logo">
-            <a href="#top" onClick={(e) => handleNavClick(e, 'top')} title="Wheels E-Bike">
-              <img src="/images/e-bike-logo-white.png" alt="e-bike" className="regular-logo img-fluid" />
-              <img src="/images/e-bike-logo-dark.png" alt="e-bike" className="sticky-logo img-fluid" />
+            <a href="#top" onClick={(e) => handleNavClick(e, 'top')} title="Motoped.ro - NIEVE Q-EN">
+              <img src="/images/e-bike-logo-white.png" alt="Motoped.ro" className="regular-logo img-fluid" />
+              <img src="/images/e-bike-logo-dark.png" alt="Motoped.ro" className="sticky-logo img-fluid" />
             </a>
             <div
               className={`menu-icon${menuOpen ? ' open' : ''}`}
@@ -41,16 +41,16 @@ export default function Header() {
           <div className={`col-sm-9 menu-conainer${menuOpen ? ' menu-open' : ''}`}>
             <nav className="site-navigation">
               <ul className="main-menu">
-                <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')}>About</a></li>
-                <li><a href="#feature" onClick={(e) => handleNavClick(e, 'feature')}>Features</a></li>
-                <li><a href="#variation" onClick={(e) => handleNavClick(e, 'variation')}>Variations</a></li>
-                <li><a href="#impact" onClick={(e) => handleNavClick(e, 'impact')}>Impacts</a></li>
-                <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Find Dealer</a></li>
-                <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Get in Touch</a></li>
+                <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')}>Despre</a></li>
+                <li><a href="#feature" onClick={(e) => handleNavClick(e, 'feature')}>Caracteristici</a></li>
+                <li><a href="#variation" onClick={(e) => handleNavClick(e, 'variation')}>Culori</a></li>
+                <li><a href="#impact" onClick={(e) => handleNavClick(e, 'impact')}>Avantaje</a></li>
+                <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Dealer</a></li>
+                <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a></li>
               </ul>
               <ul className="header-social-media">
                 <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i className="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i className="fab fa-instagram"></i></a></li>
                 <li><a href="#"><i className="fab fa-youtube"></i></a></li>
               </ul>
             </nav>

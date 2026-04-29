@@ -1,55 +1,68 @@
-'use client'
-
-import { useState, FormEvent } from 'react'
-
 export default function DealerFinder() {
-  const [searched, setSearched] = useState(false)
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setSearched(true)
-  }
-
   return (
     <section id="dealer" className="dealer-section light-gray-bg">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-4">
-            <h2>Find Dealer Near You</h2>
+            <h2>Dealer Autorizat NIEVE</h2>
+            <p style={{ color: '#666', marginTop: 12 }}>
+              Vizitați showroom-ul nostru din Sibiu și descoperiți NIEVE Q-EN
+              în persoană. Echipa noastră vă stă la dispoziție pentru un test drive gratuit.
+            </p>
           </div>
           <div className="col-lg-8">
-            <form onSubmit={handleSubmit}>
-              <div className="form-row">
-                <div className="col-lg-4 col-sm-6">
-                  <select name="country" className="form-control">
-                    <option value="">Select Country</option>
-                    <option value="Country 1">Country 1</option>
-                    <option value="Country 2">Country 2</option>
-                    <option value="Country 3">Country 3</option>
-                    <option value="Country 4">Country 4</option>
-                    <option value="Country 5">Country 5</option>
-                  </select>
-                </div>
-                <div className="col-lg-4 col-sm-6">
-                  <select name="city" className="form-control">
-                    <option value="">Select City</option>
-                    <option value="City 1">City 1</option>
-                    <option value="City 2">City 2</option>
-                    <option value="City 3">City 3</option>
-                    <option value="City 4">City 4</option>
-                    <option value="City 5">City 5</option>
-                  </select>
-                </div>
-                <div className="col-lg-4 col-sm-12">
-                  <input type="submit" className="btn fw" value="Submit" />
+            <div className="row">
+              <div className="col-md-4 mb-3">
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                  <i className="fas fa-map-marker-alt" style={{ color: '#248C46', fontSize: 20, marginTop: 4 }}></i>
+                  <div>
+                    <strong>Adresă</strong>
+                    <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
+                      Nod Rutier Vestem<br />
+                      Șoseaua Sibiului 296, Sibiu<br />
+                      <em>(Lângă benzinăria MOL)</em>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </form>
-            {searched && (
-              <p style={{ marginTop: 20, color: '#666' }}>
-                No dealers found. Please try different filters.
-              </p>
-            )}
+              <div className="col-md-4 mb-3">
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                  <i className="fas fa-phone" style={{ color: '#248C46', fontSize: 20, marginTop: 4 }}></i>
+                  <div>
+                    <strong>Telefon</strong>
+                    <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
+                      <a href="tel:+40376060045" style={{ color: '#555', textDecoration: 'none' }}>
+                        +0376 060 045
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4 mb-3">
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                  <i className="fas fa-envelope-open" style={{ color: '#248C46', fontSize: 20, marginTop: 4 }}></i>
+                  <div>
+                    <strong>Email</strong>
+                    <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
+                      <a href="mailto:contact@motoped.ro" style={{ color: '#555', textDecoration: 'none' }}>
+                        contact@motoped.ro
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style={{ marginTop: 16 }}>
+              <a
+                href="https://maps.google.com/?q=Soseaua+Sibiului+296+Sibiu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary has-icon"
+              >
+                <span>Vezi pe hartă</span>
+                <i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

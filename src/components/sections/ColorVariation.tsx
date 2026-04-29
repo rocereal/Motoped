@@ -5,9 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
 
 const slides = [
-  { color: 'Red',       colorClass: 'red',      dotBg: '#a92323', filter: 'none' },
-  { color: 'Golden',    colorClass: 'golden',   dotBg: '#c0a05d', filter: 'hue-rotate(50deg) saturate(1.3)' },
-  { color: 'Gray Blue', colorClass: 'gray-blue', dotBg: '#7489af', filter: 'hue-rotate(220deg) saturate(0.6) brightness(0.9)' },
+  { color: 'Roșu',  colorClass: 'red',      dotBg: '#a92323', img: '/images/nieve-red.png'   },
+  { color: 'Alb',   colorClass: 'golden',   dotBg: '#e0e0e0', img: '/images/nieve-white.png' },
+  { color: 'Gri',   colorClass: 'gray-blue', dotBg: '#7489af', img: '/images/nieve-grey.png'  },
 ]
 
 const dotStyle: React.CSSProperties = {
@@ -50,12 +50,12 @@ export default function ColorVariation() {
           <div className="col-lg-4 col-12 pt-lg-5">
             <div className="heading-wrapper pt-lg-5">
               <h2 className="large-heading text-uppercase" style={{ color: '#000' }}>
-                <span>Choose Your Favourite</span> Color
+                <span>Alege Culoarea</span>Preferată
               </h2>
               <p>
-                Check out here the 3 SS-100 color images to decide which one
-                suits you the best. SS-100 is available in 3 color options: Red, Golden, Blue.
-                You can also download your favourite SS-100 color image.
+                NIEVE Q-EN este disponibil în 3 culori elegante: Roșu, Alb și Gri.
+                Fiecare variantă îți oferă același nivel de performanță și confort,
+                iar tu alegi stilul care te reprezintă cel mai bine.
               </p>
             </div>
           </div>
@@ -70,10 +70,10 @@ export default function ColorVariation() {
               >
                 {slides.map((s) => (
                   <SwiperSlide key={s.color}>
-                    <div className="item pt-5" style={{ filter: s.filter }}>
+                    <div className="item pt-5">
                       <img
-                        src="/images/hero-bike.webp"
-                        alt={`SS-100 - ${s.color}`}
+                        src={s.img}
+                        alt={`NIEVE Q-EN - ${s.color}`}
                         className="img-fluid"
                       />
                     </div>
@@ -81,7 +81,6 @@ export default function ColorVariation() {
                 ))}
               </Swiper>
 
-              {/* Color dot pagination — matches original Owl Carousel style */}
               <div className="color-variation-slider">
                 <div className="owl-dots" style={{ textAlign: 'center', marginTop: 30 }}>
                   {slides.map((s, i) => (

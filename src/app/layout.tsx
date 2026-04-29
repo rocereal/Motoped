@@ -15,6 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" />
         <link rel="stylesheet" href="/css/animate.css" />
         <link rel="stylesheet" href="/css/fontawesome.min.css" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
