@@ -179,31 +179,43 @@ export default function Features() {
             </div>
           </div>
 
-          {/* Mobile: simple card layout (below lg) */}
+          {/* Mobile: card layout (below lg) */}
           <div className="col-12 d-block d-lg-none pb-5">
             <div style={{ maxWidth: 480, margin: '0 auto' }}>
-              <div
-                style={{
-                  background: '#1a1a1a',
-                  borderRadius: 16,
-                  padding: '32px 24px',
-                  textAlign: 'center',
-                  minHeight: 260,
-                }}
-              >
-                <div style={{ marginBottom: 20 }}>
-                  <img
-                    src={features[activeIndex].icon}
-                    alt={features[activeIndex].label}
-                    style={{ width: 64, height: 64 }}
-                  />
-                </div>
-                <p style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginBottom: 10, fontFamily: "'Poppins', sans-serif" }}>
-                  {features[activeIndex].label}
-                </p>
-                <p style={{ color: '#ccc', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
-                  {features[activeIndex].text}
-                </p>
+              {/* Fixed-height container — all cards stacked, only active is visible */}
+              <div style={{ position: 'relative', height: 340 }}>
+                {features.map((f, i) => (
+                  <div
+                    key={f.label}
+                    style={{
+                      position: 'absolute',
+                      top: 0, left: 0, right: 0,
+                      background: '#fff',
+                      borderRadius: 16,
+                      padding: '32px 24px',
+                      textAlign: 'center',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                      opacity: i === activeIndex ? 1 : 0,
+                      transition: 'opacity 0.4s ease',
+                      pointerEvents: i === activeIndex ? 'auto' : 'none',
+                    }}
+                  >
+                    <div style={{
+                      width: 76, height: 76, borderRadius: '50%',
+                      background: '#DD0707',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      margin: '0 auto 16px',
+                    }}>
+                      <img src={f.icon} alt={f.label} style={{ width: 42, height: 42 }} />
+                    </div>
+                    <p style={{ color: '#111', fontWeight: 700, fontSize: 17, marginBottom: 10, fontFamily: "'Poppins', sans-serif" }}>
+                      {f.label}
+                    </p>
+                    <p style={{ color: '#444', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+                      {f.text}
+                    </p>
+                  </div>
+                ))}
               </div>
 
               {/* Dot navigation */}
@@ -213,12 +225,10 @@ export default function Features() {
                     key={i}
                     onClick={() => { setActiveIndex(i); setDeg(i * STEP); }}
                     style={{
-                      width: 12,
-                      height: 12,
+                      width: 12, height: 12,
                       borderRadius: '50%',
-                      border: 'none',
-                      padding: 0,
-                      background: i === activeIndex ? '#DD0707' : '#555',
+                      border: 'none', padding: 0,
+                      background: i === activeIndex ? '#DD0707' : '#bbb',
                       cursor: 'pointer',
                       transition: 'background 0.3s',
                     }}
