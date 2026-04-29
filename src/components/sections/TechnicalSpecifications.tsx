@@ -86,14 +86,6 @@ const tabs = [
 
 export default function TechnicalSpecifications() {
   const [activeTab, setActiveTab] = useState(0)
-  const [navOpen, setNavOpen] = useState(true)
-
-  const handleTabClick = (i: number) => {
-    setActiveTab(i)
-    if (typeof window !== 'undefined' && window.innerWidth < 767) {
-      setNavOpen(false)
-    }
-  }
 
   return (
     <section id="specifications" className="specifications-section gray-bg">
@@ -122,30 +114,34 @@ export default function TechnicalSpecifications() {
           </div>
           <div className="col-md-12">
             <div className="tab-section">
-              <div
-                className="select-filter"
-                onClick={() => setNavOpen((v) => !v)}
+
+              {/* Mobile: native select dropdown */}
+              <select
+                className="tab-mobile-select"
+                value={activeTab}
+                onChange={(e) => setActiveTab(Number(e.target.value))}
               >
-                {tabs[activeTab].label}
-              </div>
-              <ul
-                className="nav nav-tabs text-uppercase"
-                role="tablist"
-                style={{ display: navOpen ? undefined : 'none' }}
-              >
+                {tabs.map((tab, i) => (
+                  <option key={tab.id} value={i}>{tab.label}</option>
+                ))}
+              </select>
+
+              {/* Desktop: horizontal nav tabs */}
+              <ul className="nav nav-tabs text-uppercase tab-desktop-nav" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
                       style={{ cursor: 'pointer' }}
-                      onClick={() => handleTabClick(i)}
+                      onClick={() => setActiveTab(i)}
                     >
                       {tab.label}
                     </span>
                   </li>
                 ))}
               </ul>
+
               <div className="tab-content">
                 {tabs.map((tab, i) => (
                   <div

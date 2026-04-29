@@ -35,12 +35,7 @@ type LightboxState = { tabIndex: number; imgIndex: number } | null
 
 export default function SmartFeaturesGallery() {
   const [activeTab, setActiveTab] = useState(0)
-  const [navOpen, setNavOpen] = useState(true)
   const [lightbox, setLightbox] = useState<LightboxState>(null)
-
-  const openLightbox = (tabIndex: number, imgIndex: number) => {
-    setLightbox({ tabIndex, imgIndex })
-  }
 
   const closeLightbox = () => setLightbox(null)
 
@@ -56,13 +51,6 @@ export default function SmartFeaturesGallery() {
     if (!lightbox) return
     const imgs = tabs[lightbox.tabIndex].images
     setLightbox({ ...lightbox, imgIndex: (lightbox.imgIndex + 1) % imgs.length })
-  }
-
-  const handleTabClick = (i: number) => {
-    setActiveTab(i)
-    if (typeof window !== 'undefined' && window.innerWidth < 767) {
-      setNavOpen(false)
-    }
   }
 
   const currentImg = lightbox ? tabs[lightbox.tabIndex].images[lightbox.imgIndex] : null
@@ -87,24 +75,27 @@ export default function SmartFeaturesGallery() {
 
           <div className="col-md-12">
             <div className="tab-section vertical-tab m-top-30">
-              <div
-                className="select-filter"
-                onClick={() => setNavOpen((v) => !v)}
+
+              {/* Mobile: native select dropdown */}
+              <select
+                className="tab-mobile-select"
+                value={activeTab}
+                onChange={(e) => setActiveTab(Number(e.target.value))}
               >
-                {tabs[activeTab].label}
-              </div>
-              <ul
-                className="nav nav-tabs text-uppercase"
-                role="tablist"
-                style={{ display: navOpen ? undefined : 'none' }}
-              >
+                {tabs.map((tab, i) => (
+                  <option key={tab.id} value={i}>{tab.label}</option>
+                ))}
+              </select>
+
+              {/* Desktop: vertical nav tabs */}
+              <ul className="nav nav-tabs text-uppercase tab-desktop-nav" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
                       style={{ cursor: 'pointer' }}
-                      onClick={() => handleTabClick(i)}
+                      onClick={() => setActiveTab(i)}
                     >
                       {tab.label}
                     </span>
@@ -127,7 +118,7 @@ export default function SmartFeaturesGallery() {
                             href={img.src}
                             onClick={(e) => {
                               e.preventDefault()
-                              openLightbox(i, imgIdx)
+                              setLightbox({ tabIndex: i, imgIndex: imgIdx })
                             }}
                           >
                             <img src={img.src} alt={img.caption} />
@@ -154,76 +145,27 @@ export default function SmartFeaturesGallery() {
             cursor: 'zoom-out',
           }}
         >
-          <button
-            onClick={lbPrev}
-            style={{
-              position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)',
-              background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)',
-              borderRadius: '50%', width: 52, height: 52, color: '#fff',
-              fontSize: 20, cursor: 'pointer', display: 'flex',
-              alignItems: 'center', justifyContent: 'center', zIndex: 1,
-            }}
-          >
+          <button onClick={lbPrev} style={{ position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
             <i className="fas fa-chevron-left" />
           </button>
 
-          <img
-            src={currentImg.src}
-            alt={currentImg.caption}
-            style={{ maxWidth: '80vw', maxHeight: '80vh', objectFit: 'contain' }}
-            onClick={(e) => e.stopPropagation()}
-          />
+          <img src={currentImg.src} alt={currentImg.caption} style={{ maxWidth: '80vw', maxHeight: '80vh', objectFit: 'contain' }} onClick={(e) => e.stopPropagation()} />
 
-          <div
-            style={{
-              position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
-              color: '#fff', fontSize: 16, fontFamily: "'Poppins', sans-serif",
-              background: 'rgba(0,0,0,0.5)', padding: '6px 16px', borderRadius: 4,
-            }}
-          >
+          <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', color: '#fff', fontSize: 16, fontFamily: "'Poppins', sans-serif", background: 'rgba(0,0,0,0.5)', padding: '6px 16px', borderRadius: 4 }}>
             {currentImg.caption}
           </div>
 
-          <button
-            onClick={lbNext}
-            style={{
-              position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
-              background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)',
-              borderRadius: '50%', width: 52, height: 52, color: '#fff',
-              fontSize: 20, cursor: 'pointer', display: 'flex',
-              alignItems: 'center', justifyContent: 'center', zIndex: 1,
-            }}
-          >
+          <button onClick={lbNext} style={{ position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
             <i className="fas fa-chevron-right" />
           </button>
 
-          <button
-            onClick={closeLightbox}
-            style={{
-              position: 'absolute', top: 24, right: 32,
-              background: 'none', border: 'none', color: '#fff',
-              fontSize: 36, lineHeight: 1, cursor: 'pointer',
-            }}
-          >
+          <button onClick={closeLightbox} style={{ position: 'absolute', top: 24, right: 32, background: 'none', border: 'none', color: '#fff', fontSize: 36, lineHeight: 1, cursor: 'pointer' }}>
             &times;
           </button>
 
-          <div
-            style={{
-              position: 'absolute', bottom: 60, left: '50%', transform: 'translateX(-50%)',
-              display: 'flex', gap: 8,
-            }}
-          >
+          <div style={{ position: 'absolute', bottom: 60, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8 }}>
             {tabs[lightbox.tabIndex].images.map((_, i) => (
-              <button
-                key={i}
-                onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, imgIndex: i }) }}
-                style={{
-                  width: 10, height: 10, borderRadius: '50%', border: 'none', padding: 0,
-                  background: i === lightbox.imgIndex ? '#fff' : 'rgba(255,255,255,0.4)',
-                  cursor: 'pointer',
-                }}
-              />
+              <button key={i} onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, imgIndex: i }) }} style={{ width: 10, height: 10, borderRadius: '50%', border: 'none', padding: 0, background: i === lightbox.imgIndex ? '#fff' : 'rgba(255,255,255,0.4)', cursor: 'pointer' }} />
             ))}
           </div>
         </div>

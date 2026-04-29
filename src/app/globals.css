@@ -27,6 +27,18 @@ html {
   display: block !important;
 }
 
+/* Tab mobile/desktop visibility */
+.tab-mobile-select { display: block; width: 100%; padding: 14px 18px; font-size: 16px; font-weight: 700; font-family: 'Poppins', sans-serif; border: 2px solid #dd0707; cursor: pointer; text-transform: uppercase; background: #fff; margin-bottom: 20px; }
+.tab-desktop-nav { display: none !important; }
+@media (min-width: 768px) {
+  .tab-mobile-select { display: none !important; }
+  .tab-desktop-nav { display: flex !important; }
+}
+.vertical-tab .tab-desktop-nav { display: none !important; }
+@media (min-width: 768px) {
+  .vertical-tab .tab-desktop-nav { display: block !important; }
+}
+
 /* Logo size */
 .main-header .logo img {
   max-height: 35px !important;
