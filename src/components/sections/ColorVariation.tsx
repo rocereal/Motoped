@@ -2,14 +2,28 @@
 
 import { useState, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 
 const slides = [
-  { color: 'Red',      dotColor: '#a92323', filter: 'none' },
-  { color: 'Golden',   dotColor: '#c0a05d', filter: 'hue-rotate(50deg) saturate(1.3)' },
-  { color: 'Gray Blue',dotColor: '#7489af', filter: 'hue-rotate(220deg) saturate(0.6) brightness(0.9)' },
+  { color: 'Red',       colorClass: 'red',      dotBg: '#a92323', filter: 'none' },
+  { color: 'Golden',    colorClass: 'golden',   dotBg: '#c0a05d', filter: 'hue-rotate(50deg) saturate(1.3)' },
+  { color: 'Gray Blue', colorClass: 'gray-blue', dotBg: '#7489af', filter: 'hue-rotate(220deg) saturate(0.6) brightness(0.9)' },
 ]
+
+const dotStyle: React.CSSProperties = {
+  width: 32,
+  height: 32,
+  minWidth: 32,
+  borderRadius: '50%',
+  border: 'none',
+  padding: 0,
+  margin: '0 10px',
+  cursor: 'pointer',
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  boxSizing: 'border-box',
+  flexShrink: 0,
+}
 
 export default function ColorVariation() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -48,8 +62,6 @@ export default function ColorVariation() {
           <div className="col-lg-7 col-12 pt-lg-5">
             <div className="pt-lg-5">
               <Swiper
-                modules={[Navigation]}
-                navigation
                 slidesPerView={1}
                 loop
                 onSwiper={(swiper) => { swiperRef.current = swiper }}
@@ -69,15 +81,16 @@ export default function ColorVariation() {
                 ))}
               </Swiper>
 
-              {/* Colored dot pagination matching original Owl Carousel style */}
-              <div className="color-variation-slider" style={{ textAlign: 'center', marginTop: 20 }}>
-                <div className="owl-dots" style={{ display: 'inline-block' }}>
+              {/* Color dot pagination — matches original Owl Carousel style */}
+              <div className="color-variation-slider">
+                <div className="owl-dots" style={{ textAlign: 'center', marginTop: 30 }}>
                   {slides.map((s, i) => (
                     <button
                       key={s.color}
                       onClick={() => swiperRef.current?.slideToLoop(i)}
-                      className={`owl-dot ${s.color.toLowerCase().replace(' ', '-')}${activeIndex === i ? ' active' : ''}`}
+                      className={`owl-dot ${s.colorClass}${activeIndex === i ? ' active' : ''}`}
                       aria-label={s.color}
+                      style={{ ...dotStyle, background: s.dotBg }}
                     />
                   ))}
                 </div>
