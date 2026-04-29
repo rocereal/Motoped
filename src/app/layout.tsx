@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Wheels - Motorcycle',
-  description: 'Thrilling DAD3333 - Power Packed Performance',
+  title: 'Wheels - E-Bike SS-100',
+  description: 'Smart & Connected E-BIKE SS-100 - Power Packed Electric Performance',
   icons: { icon: '/images/favicon.ico' },
 }
 

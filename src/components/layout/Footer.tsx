@@ -10,8 +10,8 @@ export default function Footer() {
                   <h4 className="widget-title">About Us</h4>
                 </div>
                 <div className="widget-contet">
-                  <img src="/images/motorcycle-logo.png" className="footer-logo" alt="" />
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra</p>
+                  <img src="/images/e-bike-logo-white.png" className="footer-logo img-fluid" alt="E-Bike" />
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra.</p>
                 </div>
               </div>
             </div>
@@ -25,8 +25,9 @@ export default function Footer() {
                     <li><a href="#about">About</a></li>
                     <li><a href="#feature">Features</a></li>
                     <li><a href="#variation">Variations</a></li>
-                    <li><a href="#capability">Specials</a></li>
-                    <li><a href="#technical">Technical Specs</a></li>
+                    <li><a href="#impact">Impacts</a></li>
+                    <li><a href="#dealer">Find Dealer</a></li>
+                    <li><a href="#contact">Get in Touch</a></li>
                   </ul>
                 </div>
               </div>

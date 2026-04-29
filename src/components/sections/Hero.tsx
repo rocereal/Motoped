@@ -1,44 +1,83 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+
 export default function Hero() {
+  const progressRef = useRef<HTMLDivElement>(null)
+  const valueRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    let value = 0
+    const end = 100
+    const speed = 100
+    const timer = setInterval(() => {
+      value++
+      if (valueRef.current) valueRef.current.textContent = `${value}%`
+      if (progressRef.current) {
+        progressRef.current.style.background = `conic-gradient(#248C46 ${value * 3.6}deg, #ededed 0deg)`
+      }
+      if (value === end) clearInterval(timer)
+    }, speed)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <section id="home" className="height-100 hero-section light-text">
-      <div className="section-background">
-        <div className="background-wrapper">
-          <div
-            className="background-inner"
-            style={{
-              backgroundImage: "url('/images/bg-5.jpg')",
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center center',
-              backgroundSize: 'cover',
-              backgroundColor: '#1c232d',
-            }}
-          />
-        </div>
-      </div>
-      <div className="container double-top-padding double-bottom-padding height-100">
+    <section
+      id="home"
+      className="height-100 hero-section style-1 light-text"
+      style={{
+        position: 'relative',
+        height: '100%',
+        backgroundColor: 'black',
+        backgroundImage: "url('/images/bg-5.jpg')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'right',
+        backgroundSize: 'cover',
+      }}
+    >
+      <div className="container double-top-padding double-bottom-padding">
         <div className="row">
-          <div className="col-md-6 banner-content">
-            <h2 className="top-sub-heading">Introducing</h2>
-            <h1 className="large-heading"><span>Thrilling</span> DAD3333</h1>
+          <div className="col-lg-5 col-md-12 banner-content bicycle-img">
+            <h2 className="top-sub-heading">New SS-100</h2>
+            <h1 className="large-heading"><span>Smart &amp; Connected</span>E-BIKE</h1>
             <div className="text-block text-lead">
-              <p>Two Wheels to move the soul. <br />Power Packed Performance</p>
+              <p>
+                The most popular electric motorcycles include SS-100 ($10,000),
+                SS-130 ($10,500) and SS-200 ($12,000).
+              </p>
             </div>
-            <a
-              className="btn btn-primary btn-accent has-icon"
-              href="#book-ride"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('book-ride')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              <span>Book test ride</span><i className="fas fa-arrow-right"></i>
-            </a>
+            <div className="btn-wrapper">
+              <a
+                className="btn btn-primary btn-accent has-icon"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Download brochure</span><i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div className="col-lg-7 col-12 px-0">
+            <div className="container1 d-none d-lg-block">
+              <div className="circular-progress" ref={progressRef}>
+                <span className="progress-value" ref={valueRef}>0%</span>
+              </div>
+              <div className="hero-img">
+                <img src="/images/hero-bike.webp" alt="SS-100 E-Bike" className="img-fluid" />
+              </div>
+              <span className="blink">
+                <img src="/images/charging-image.webp" alt="charging" className="img-fluid" />
+              </span>
+            </div>
+            <div className="container1 d-block d-lg-none">
+              <div className="hero-img">
+                <img src="/images/hero-ebike.gif" alt="E-Bike" className="img-fluid" />
+              </div>
+            </div>
           </div>
         </div>
-        <div className="placeholder-text">WXL1300cc</div>
-        <div className="pricing-text">Starting at <span>$12,799*</span></div>
       </div>
     </section>
   )

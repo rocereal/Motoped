@@ -5,10 +5,9 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Features from '@/components/sections/Features'
 import ColorVariation from '@/components/sections/ColorVariation'
-import Capability from '@/components/sections/Capability'
-import Specifications from '@/components/sections/Specifications'
-import BookRide from '@/components/sections/BookRide'
+import EnvironmentalImpacts from '@/components/sections/EnvironmentalImpacts'
 import DealerFinder from '@/components/sections/DealerFinder'
+import Contact from '@/components/sections/Contact'
 
 export default function Home() {
   return (
@@ -21,10 +20,9 @@ export default function Home() {
           <About />
           <Features />
           <ColorVariation />
-          <Capability />
-          <Specifications />
-          <BookRide />
+          <EnvironmentalImpacts />
           <DealerFinder />
+          <Contact />
         </div>
         <Footer />
       </div>
