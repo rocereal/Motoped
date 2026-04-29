@@ -86,6 +86,12 @@ const tabs = [
 
 export default function TechnicalSpecifications() {
   const [activeTab, setActiveTab] = useState(0)
+  const [navOpen, setNavOpen] = useState(false)
+
+  const selectTab = (i: number) => {
+    setActiveTab(i)
+    setNavOpen(false)
+  }
 
   return (
     <section id="specifications" className="specifications-section gray-bg">
@@ -113,28 +119,24 @@ export default function TechnicalSpecifications() {
             </div>
           </div>
           <div className="col-md-12">
-            <div className="tab-section">
+            <div className={`tab-section${navOpen ? ' nav-open' : ''}`}>
 
-              {/* Mobile: native select dropdown */}
-              <select
-                className="tab-mobile-select"
-                value={activeTab}
-                onChange={(e) => setActiveTab(Number(e.target.value))}
+              {/* Mobile: custom select-filter — hidden on desktop via style.css */}
+              <div
+                className="select-filter"
+                onClick={() => setNavOpen(!navOpen)}
               >
-                {tabs.map((tab, i) => (
-                  <option key={tab.id} value={i}>{tab.label}</option>
-                ))}
-              </select>
+                {tabs[activeTab].label}
+              </div>
 
-              {/* Desktop: horizontal nav tabs — hidden on mobile via CSS */}
+              {/* Nav tabs */}
               <ul className="nav nav-tabs text-uppercase" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => setActiveTab(i)}
+                      onClick={() => selectTab(i)}
                     >
                       {tab.label}
                     </span>

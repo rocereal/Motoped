@@ -27,16 +27,12 @@ html {
   display: block !important;
 }
 
-/* Tab mobile select */
-.tab-mobile-select { display: block; width: 100%; padding: 14px 44px 14px 18px; font-size: 16px; font-weight: 700; font-family: 'Poppins', sans-serif; border: 2px solid #dd0707; cursor: pointer; text-transform: uppercase; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 18px center; appearance: none; -webkit-appearance: none; color: #000; margin-bottom: 20px; outline: none; }
-.tab-mobile-select:focus { outline: none; box-shadow: none; }
-/* Hide select on desktop, hide nav-tabs on mobile */
-@media (min-width: 768px) {
-  .tab-mobile-select { display: none !important; }
-}
+/* Show nav-tabs when dropdown is open on mobile */
 @media (max-width: 767px) {
-  .tab-section .nav-tabs,
-  .vertical-tab .nav-tabs { display: none !important; }
+  .tab-section.nav-open .nav-tabs,
+  .vertical-tab.nav-open .nav-tabs {
+    display: block !important;
+  }
 }
 
 /* Logo size */

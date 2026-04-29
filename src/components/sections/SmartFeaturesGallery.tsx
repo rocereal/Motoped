@@ -1,25 +1,26 @@
 'use client'
 
 import { useState } from 'react'
+import Lightbox from 'yet-another-react-lightbox'
+import Counter from 'yet-another-react-lightbox/plugins/counter'
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
+import Zoom from 'yet-another-react-lightbox/plugins/zoom'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import 'yet-another-react-lightbox/styles.css'
+import 'yet-another-react-lightbox/plugins/counter.css'
+import 'yet-another-react-lightbox/plugins/thumbnails.css'
 
 const tabs = [
-  {
-    id: 'highlights',
-    label: 'Evidențieri',
-    images: [
-      { src: '/images/nieve-front-led.png', caption: 'Faruri LED Full-Angle' },
-      { src: '/images/nieve-front-45.png', caption: 'Design Modern Compact' },
-      { src: '/images/nieve-rear-45.png', caption: 'Stopuri LED Integrate' },
-    ],
-    columns: 3,
-  },
   {
     id: 'exterior',
     label: 'Exterior',
     images: [
-      { src: '/images/nieve-front-white.png', caption: 'Față Elegantă' },
-      { src: '/images/nieve-rear-white.png', caption: 'Spate Compact' },
-      { src: '/images/nieve-red-side.png', caption: 'Profil Lateral' },
+      { src: '/images/gallery-ext-1.png', caption: 'Față Elegantă' },
+      { src: '/images/gallery-ext-2.png', caption: 'Design Compact' },
+      { src: '/images/gallery-ext-3.png', caption: 'Profil Aerodinamic' },
+      { src: '/images/gallery-ext-4.png', caption: 'Vedere Laterală' },
+      { src: '/images/gallery-ext-5.png', caption: 'Detalii Caroserie' },
+      { src: '/images/gallery-ext-6.png', caption: 'Spate Compact' },
     ],
     columns: 3,
   },
@@ -27,34 +28,38 @@ const tabs = [
     id: 'interior',
     label: 'Interior',
     images: [
-      { src: '/images/nieve-interior-dashboard.png', caption: 'Bord cu Ecran 7 inch' },
-      { src: '/images/nieve-interior-seats.png', caption: 'Scaune Confortabile' },
+      { src: '/images/gallery-int-1.png', caption: 'Habitaclu Modern' },
+      { src: '/images/gallery-int-2.png', caption: 'Scaune Confortabile' },
+      { src: '/images/gallery-int-3.png', caption: 'Bord Digital' },
+      { src: '/images/gallery-int-4.png', caption: 'Ecran Touchscreen 7"' },
+      { src: '/images/gallery-int-5.png', caption: 'Spațiu Interior' },
+      { src: '/images/gallery-int-6.png', caption: 'Detalii Interior' },
     ],
-    columns: 2,
+    columns: 3,
   },
 ]
 
-type LightboxState = { tabIndex: number; imgIndex: number } | null
-
 export default function SmartFeaturesGallery() {
   const [activeTab, setActiveTab] = useState(0)
-  const [lightbox, setLightbox] = useState<LightboxState>(null)
+  const [navOpen, setNavOpen] = useState(false)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
 
-  const lbPrev = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!lightbox) return
-    const imgs = tabs[lightbox.tabIndex].images
-    setLightbox({ ...lightbox, imgIndex: (lightbox.imgIndex - 1 + imgs.length) % imgs.length })
+  const openLightbox = (imgIndex: number) => {
+    setLightboxIndex(imgIndex)
+    setLightboxOpen(true)
   }
 
-  const lbNext = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!lightbox) return
-    const imgs = tabs[lightbox.tabIndex].images
-    setLightbox({ ...lightbox, imgIndex: (lightbox.imgIndex + 1) % imgs.length })
+  const selectTab = (i: number) => {
+    setActiveTab(i)
+    setNavOpen(false)
+    setLightboxOpen(false)
   }
 
-  const currentImg = lightbox ? tabs[lightbox.tabIndex].images[lightbox.imgIndex] : null
+  const currentSlides = tabs[activeTab].images.map((img) => ({
+    src: img.src,
+    alt: img.caption,
+  }))
 
   return (
     <section id="gallery" className="technology-section gray-bg">
@@ -75,27 +80,24 @@ export default function SmartFeaturesGallery() {
           </div>
 
           <div className="col-md-12">
-            <div className="tab-section vertical-tab m-top-30">
+            <div className={`tab-section vertical-tab m-top-30${navOpen ? ' nav-open' : ''}`}>
 
-              {/* Mobile: native select — hidden on desktop via CSS */}
-              <select
-                className="tab-mobile-select"
-                value={activeTab}
-                onChange={(e) => setActiveTab(Number(e.target.value))}
+              {/* Mobile: custom select-filter div — hidden on desktop via style.css */}
+              <div
+                className="select-filter"
+                onClick={() => setNavOpen(!navOpen)}
               >
-                {tabs.map((tab, i) => (
-                  <option key={tab.id} value={i}>{tab.label}</option>
-                ))}
-              </select>
+                {tabs[activeTab].label}
+              </div>
 
-              {/* Nav tabs — exact template structure, hidden on mobile via CSS */}
+              {/* Nav tabs */}
               <ul className="nav nav-tabs text-uppercase" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
-                      onClick={() => setActiveTab(i)}
+                      onClick={() => selectTab(i)}
                     >
                       {tab.label}
                     </span>
@@ -103,7 +105,7 @@ export default function SmartFeaturesGallery() {
                 ))}
               </ul>
 
-              {/* Tab content — exact template structure */}
+              {/* Tab content */}
               <div className="tab-content">
                 {tabs.map((tab, i) => (
                   <div
@@ -120,7 +122,7 @@ export default function SmartFeaturesGallery() {
                             href={img.src}
                             onClick={(e) => {
                               e.preventDefault()
-                              setLightbox({ tabIndex: i, imgIndex: imgIdx })
+                              openLightbox(imgIdx)
                             }}
                           >
                             <img src={img.src} alt={img.caption} />
@@ -138,41 +140,16 @@ export default function SmartFeaturesGallery() {
         </div>
       </div>
 
-      {/* Lightbox — replaces FancyBox */}
-      {lightbox && currentImg && (
-        <div
-          onClick={() => setLightbox(null)}
-          style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
-            background: 'rgba(0,0,0,0.92)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'zoom-out',
-          }}
-        >
-          <button onClick={lbPrev} style={{ position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="fas fa-chevron-left" />
-          </button>
-
-          <img
-            src={currentImg.src}
-            alt={currentImg.caption}
-            style={{ maxWidth: '85vw', maxHeight: '85vh', objectFit: 'contain' }}
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          <button onClick={lbNext} style={{ position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="fas fa-chevron-right" />
-          </button>
-
-          <button onClick={() => setLightbox(null)} style={{ position: 'absolute', top: 24, right: 32, background: 'none', border: 'none', color: '#fff', fontSize: 40, lineHeight: 1, cursor: 'pointer' }}>
-            &times;
-          </button>
-
-          <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: '#fff', fontSize: 14, fontFamily: "'Poppins',sans-serif", background: 'rgba(0,0,0,0.5)', padding: '5px 14px', borderRadius: 4, whiteSpace: 'nowrap' }}>
-            {currentImg.caption} &nbsp;·&nbsp; {(lightbox.imgIndex + 1)}/{tabs[lightbox.tabIndex].images.length}
-          </div>
-        </div>
-      )}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={currentSlides}
+        index={lightboxIndex}
+        plugins={[Counter, Slideshow, Zoom, Thumbnails]}
+        counter={{ container: { style: { top: 0, bottom: 'unset' } } }}
+        zoom={{ maxZoomPixelRatio: 3 }}
+        thumbnails={{ position: 'bottom', width: 80, height: 60, gap: 8 }}
+      />
     </section>
   )
 }
