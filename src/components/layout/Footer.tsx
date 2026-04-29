@@ -10,7 +10,7 @@ export default function Footer() {
                   <h4 className="widget-title">Despre Noi</h4>
                 </div>
                 <div className="widget-contet">
-                  <img src="/images/logo-motoped.png" className="footer-logo img-fluid" alt="Motoped.ro" />
+                  <img src="/images/logo-motoped.png" className="footer-logo img-fluid" alt="Motoped.ro" style={{ maxHeight: 90 }} />
                   <p>
                     Dealer autorizat NIEVE în România. Aducem mobilitatea electrică modernă
                     mai aproape de tine — vehicule 100% electrice, ecologice și accesibile,
