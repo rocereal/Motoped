@@ -27,26 +27,23 @@ html {
   display: block !important;
 }
 
-/* Logo responsive sizing — overrides template's .logo img { max-height: 48px } */
-.main-header .logo img {
-  max-height: 170px !important;
-}
-@media (min-width: 768px) {
-  .main-header .logo img {
-    max-height: 200px !important;
-  }
-}
-
-/* Remove template padding that creates empty space above header content */
+/* Header: fixed height container so logo never pushes the bar down */
 .main-header .logo {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  height: 80px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-/* Header row: center logo column vertically with nav column */
+/* Logo size: fits within the 80px header bar */
+.main-header .logo img {
+  max-height: 64px !important;
+  width: auto !important;
+}
+
+/* Header row: center logo column with nav column */
 .main-header .row {
   align-items: center;
-  min-height: 80px;
 }
 
 /* Center hamburger vertically with logo on mobile */
