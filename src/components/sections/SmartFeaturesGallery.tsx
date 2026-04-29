@@ -11,6 +11,7 @@ const tabs = [
       { src: '/images/nieve-front-45.png', caption: 'Design Modern Compact' },
       { src: '/images/nieve-rear-45.png', caption: 'Stopuri LED Integrate' },
     ],
+    columns: 3,
   },
   {
     id: 'exterior',
@@ -20,6 +21,7 @@ const tabs = [
       { src: '/images/nieve-rear-white.png', caption: 'Spate Compact' },
       { src: '/images/nieve-red-side.png', caption: 'Profil Lateral' },
     ],
+    columns: 3,
   },
   {
     id: 'interior',
@@ -28,6 +30,7 @@ const tabs = [
       { src: '/images/nieve-interior-dashboard.png', caption: 'Bord cu Ecran 7 inch' },
       { src: '/images/nieve-interior-seats.png', caption: 'Scaune Confortabile' },
     ],
+    columns: 2,
   },
 ]
 
@@ -36,8 +39,6 @@ type LightboxState = { tabIndex: number; imgIndex: number } | null
 export default function SmartFeaturesGallery() {
   const [activeTab, setActiveTab] = useState(0)
   const [lightbox, setLightbox] = useState<LightboxState>(null)
-
-  const closeLightbox = () => setLightbox(null)
 
   const lbPrev = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -76,7 +77,7 @@ export default function SmartFeaturesGallery() {
           <div className="col-md-12">
             <div className="tab-section vertical-tab m-top-30">
 
-              {/* Mobile: native select dropdown */}
+              {/* Mobile: native select — hidden on desktop via CSS */}
               <select
                 className="tab-mobile-select"
                 value={activeTab}
@@ -87,14 +88,13 @@ export default function SmartFeaturesGallery() {
                 ))}
               </select>
 
-              {/* Desktop: vertical nav tabs */}
-              <ul className="nav nav-tabs text-uppercase tab-desktop-nav" role="tablist">
+              {/* Nav tabs — exact template structure, hidden on mobile via CSS */}
+              <ul className="nav nav-tabs text-uppercase" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
-                      style={{ cursor: 'pointer' }}
                       onClick={() => setActiveTab(i)}
                     >
                       {tab.label}
@@ -103,15 +103,17 @@ export default function SmartFeaturesGallery() {
                 ))}
               </ul>
 
+              {/* Tab content — exact template structure */}
               <div className="tab-content">
                 {tabs.map((tab, i) => (
                   <div
                     key={tab.id}
+                    id={tab.id}
                     className={`tab-pane${i === activeTab ? ' active' : ''}`}
                     role="tabpanel"
                     style={{ display: i === activeTab ? 'block' : 'none' }}
                   >
-                    <ul className={`st-gallery column-${tab.images.length === 2 ? '2' : '3'}`}>
+                    <ul className={`st-gallery column-${tab.columns}`}>
                       {tab.images.map((img, imgIdx) => (
                         <li key={img.src}>
                           <a
@@ -130,14 +132,16 @@ export default function SmartFeaturesGallery() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
       </div>
 
+      {/* Lightbox — replaces FancyBox */}
       {lightbox && currentImg && (
         <div
-          onClick={closeLightbox}
+          onClick={() => setLightbox(null)}
           style={{
             position: 'fixed', inset: 0, zIndex: 9999,
             background: 'rgba(0,0,0,0.92)',
@@ -145,28 +149,27 @@ export default function SmartFeaturesGallery() {
             cursor: 'zoom-out',
           }}
         >
-          <button onClick={lbPrev} style={{ position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
+          <button onClick={lbPrev} style={{ position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <i className="fas fa-chevron-left" />
           </button>
 
-          <img src={currentImg.src} alt={currentImg.caption} style={{ maxWidth: '80vw', maxHeight: '80vh', objectFit: 'contain' }} onClick={(e) => e.stopPropagation()} />
+          <img
+            src={currentImg.src}
+            alt={currentImg.caption}
+            style={{ maxWidth: '85vw', maxHeight: '85vh', objectFit: 'contain' }}
+            onClick={(e) => e.stopPropagation()}
+          />
 
-          <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', color: '#fff', fontSize: 16, fontFamily: "'Poppins', sans-serif", background: 'rgba(0,0,0,0.5)', padding: '6px 16px', borderRadius: 4 }}>
-            {currentImg.caption}
-          </div>
-
-          <button onClick={lbNext} style={{ position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
+          <button onClick={lbNext} style={{ position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.5)', borderRadius: '50%', width: 52, height: 52, color: '#fff', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <i className="fas fa-chevron-right" />
           </button>
 
-          <button onClick={closeLightbox} style={{ position: 'absolute', top: 24, right: 32, background: 'none', border: 'none', color: '#fff', fontSize: 36, lineHeight: 1, cursor: 'pointer' }}>
+          <button onClick={() => setLightbox(null)} style={{ position: 'absolute', top: 24, right: 32, background: 'none', border: 'none', color: '#fff', fontSize: 40, lineHeight: 1, cursor: 'pointer' }}>
             &times;
           </button>
 
-          <div style={{ position: 'absolute', bottom: 60, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8 }}>
-            {tabs[lightbox.tabIndex].images.map((_, i) => (
-              <button key={i} onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, imgIndex: i }) }} style={{ width: 10, height: 10, borderRadius: '50%', border: 'none', padding: 0, background: i === lightbox.imgIndex ? '#fff' : 'rgba(255,255,255,0.4)', cursor: 'pointer' }} />
-            ))}
+          <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: '#fff', fontSize: 14, fontFamily: "'Poppins',sans-serif", background: 'rgba(0,0,0,0.5)', padding: '5px 14px', borderRadius: 4, whiteSpace: 'nowrap' }}>
+            {currentImg.caption} &nbsp;·&nbsp; {(lightbox.imgIndex + 1)}/{tabs[lightbox.tabIndex].images.length}
           </div>
         </div>
       )}

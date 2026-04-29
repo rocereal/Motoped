@@ -126,8 +126,8 @@ export default function TechnicalSpecifications() {
                 ))}
               </select>
 
-              {/* Desktop: horizontal nav tabs */}
-              <ul className="nav nav-tabs text-uppercase tab-desktop-nav" role="tablist">
+              {/* Desktop: horizontal nav tabs — hidden on mobile via CSS */}
+              <ul className="nav nav-tabs text-uppercase" role="tablist">
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
