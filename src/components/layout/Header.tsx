@@ -26,8 +26,8 @@ export default function Header() {
         <div className="row">
           <div className="col-sm-3 logo">
             <a href="#top" onClick={(e) => handleNavClick(e, 'top')} title="Motoped.ro - NIEVE Q-EN">
-              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="regular-logo img-fluid" style={{ maxHeight: 60 }} />
-              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="sticky-logo img-fluid" style={{ maxHeight: 60 }} />
+              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="regular-logo img-fluid" style={{ maxHeight: 100 }} />
+              <img src="/images/logo-motoped.png" alt="Motoped.ro" className="sticky-logo img-fluid" style={{ maxHeight: 100 }} />
             </a>
             <div
               className={`menu-icon${menuOpen ? ' open' : ''}`}
