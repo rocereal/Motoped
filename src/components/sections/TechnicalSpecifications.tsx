@@ -86,6 +86,14 @@ const tabs = [
 
 export default function TechnicalSpecifications() {
   const [activeTab, setActiveTab] = useState(0)
+  const [navOpen, setNavOpen] = useState(true)
+
+  const handleTabClick = (i: number) => {
+    setActiveTab(i)
+    if (typeof window !== 'undefined' && window.innerWidth < 767) {
+      setNavOpen(false)
+    }
+  }
 
   return (
     <section id="specifications" className="specifications-section gray-bg">
@@ -114,15 +122,24 @@ export default function TechnicalSpecifications() {
           </div>
           <div className="col-md-12">
             <div className="tab-section">
-              <div className="select-filter">{tabs[activeTab].label}</div>
-              <ul className="nav nav-tabs text-uppercase" role="tablist">
+              <div
+                className="select-filter"
+                onClick={() => setNavOpen((v) => !v)}
+              >
+                {tabs[activeTab].label}
+              </div>
+              <ul
+                className="nav nav-tabs text-uppercase"
+                role="tablist"
+                style={{ display: navOpen ? undefined : 'none' }}
+              >
                 {tabs.map((tab, i) => (
                   <li key={tab.id} className="nav-item">
                     <span
                       className={`nav-link${i === activeTab ? ' active' : ''}`}
                       role="tab"
                       style={{ cursor: 'pointer' }}
-                      onClick={() => setActiveTab(i)}
+                      onClick={() => handleTabClick(i)}
                     >
                       {tab.label}
                     </span>
