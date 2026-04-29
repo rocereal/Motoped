@@ -29,7 +29,7 @@ export default function Hero() {
         position: 'relative',
         height: '100%',
         backgroundColor: '#000',
-        backgroundImage: "url('/images/bg-11.jpg')",
+        backgroundImage: "url('/images/hero-bg.jpg')",
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
         backgroundSize: 'cover',
