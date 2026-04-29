@@ -27,27 +27,3 @@ html {
   display: block !important;
 }
 
-/* Header: fixed height container so logo never pushes the bar down */
-.main-header .logo {
-  height: 80px !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-/* Logo size: fits within the 80px header bar */
-.main-header .logo img {
-  max-height: 64px !important;
-  width: auto !important;
-}
-
-/* Header row: center logo column with nav column */
-.main-header .row {
-  align-items: center;
-}
-
-/* Center hamburger vertically with logo on mobile */
-.main-header .menu-icon {
-  top: 50% !important;
-  transform: translateY(-50%);
-}
