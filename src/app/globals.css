@@ -27,13 +27,15 @@ html {
   display: block !important;
 }
 
-/* Logo responsive sizing */
-.logo-img {
-  max-height: 170px;
+/* Logo responsive sizing — overrides template's .logo img { max-height: 48px } */
+.main-header .logo img,
+.main-header .logo .logo-img {
+  max-height: 170px !important;
 }
 @media (min-width: 768px) {
-  .logo-img {
-    max-height: 200px;
+  .main-header .logo img,
+  .main-header .logo .logo-img {
+    max-height: 200px !important;
   }
 }
 
