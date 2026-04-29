@@ -35,7 +35,7 @@ export default function Contact() {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-7 col-12">
+          <div className="col-lg-8 col-12">
             <div className="form-wrapper">
               {submitted ? (
                 <p style={{ fontSize: 20, marginTop: 30, color: '#248C46', fontWeight: 600 }}>
@@ -76,39 +76,6 @@ export default function Contact() {
                   </div>
                 </form>
               )}
-            </div>
-          </div>
-          <div className="col-lg-5 col-12 pt-4 pt-lg-0">
-            <div style={{ paddingTop: 20 }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
-                <i className="fas fa-phone" style={{ color: '#248C46', fontSize: 22, marginTop: 3 }}></i>
-                <div>
-                  <strong style={{ display: 'block', marginBottom: 4 }}>Telefon</strong>
-                  <a href="tel:+40376060045" style={{ color: '#333', textDecoration: 'none', fontSize: 15 }}>
-                    +0376 060 045
-                  </a>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
-                <i className="fas fa-envelope-open" style={{ color: '#248C46', fontSize: 22, marginTop: 3 }}></i>
-                <div>
-                  <strong style={{ display: 'block', marginBottom: 4 }}>Email</strong>
-                  <a href="mailto:contact@motoped.ro" style={{ color: '#333', textDecoration: 'none', fontSize: 15 }}>
-                    contact@motoped.ro
-                  </a>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                <i className="fas fa-map-marker-alt" style={{ color: '#248C46', fontSize: 22, marginTop: 3 }}></i>
-                <div>
-                  <strong style={{ display: 'block', marginBottom: 4 }}>Adresă</strong>
-                  <span style={{ color: '#333', fontSize: 15 }}>
-                    Nod Rutier Vestem<br />
-                    Șoseaua Sibiului 296, Sibiu<br />
-                    <em style={{ color: '#666' }}>(Lângă benzinăria MOL)</em>
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

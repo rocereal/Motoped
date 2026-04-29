@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
 
 const slides = [
-  { color: 'Roșu',  colorClass: 'red',      dotBg: '#a92323', img: '/images/nieve-red.png'   },
+  { color: 'Roșu',  colorClass: 'red',      dotBg: '#a92323', img: '/images/nieve-red-side.png' },
   { color: 'Alb',   colorClass: 'golden',   dotBg: '#e0e0e0', img: '/images/nieve-white.png' },
   { color: 'Gri',   colorClass: 'gray-blue', dotBg: '#7489af', img: '/images/nieve-grey.png'  },
 ]
