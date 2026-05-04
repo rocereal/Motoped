@@ -13,6 +13,12 @@ section[id] {
   scroll-margin-top: 70px;
 }
 
+/* Hero: ensure button column is above the car image on mobile */
+.hero-section .banner-content {
+  position: relative;
+  z-index: 5;
+}
+
 /* Swiper integration with template styles */
 .swiper-color-variation {
   width: 100%;
