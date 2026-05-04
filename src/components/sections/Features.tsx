@@ -75,7 +75,7 @@ export default function Features() {
         setDeg((d) => d + STEP)
         return (prev + 1) % features.length
       })
-    }, 1500)
+    }, 4000)
     return () => clearInterval(timer)
   }, [])
 

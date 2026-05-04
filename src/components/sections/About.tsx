@@ -31,12 +31,8 @@ export default function About() {
               <a
                 href="#dealer"
                 className="btn btn-primary has-icon"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('dealer')?.scrollIntoView({ behavior: 'smooth' })
-                }}
               >
-                <span>Află mai multe</span>
+                <span>Cumpără acum</span>
                 <i className="fas fa-arrow-right"></i>
               </a>
             </div>

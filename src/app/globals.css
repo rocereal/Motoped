@@ -27,6 +27,13 @@ html {
   display: block !important;
 }
 
+/* Fix iOS Safari: 100vh excludes browser chrome, dvh accounts for it */
+@supports (height: 100dvh) {
+  .site-navigation {
+    height: 100dvh !important;
+  }
+}
+
 /* Testimonial nav buttons — remove Bootstrap active/focus color */
 .owl-nav button:focus,
 .owl-nav button:active,
@@ -69,6 +76,16 @@ html {
   .main-header .logo img {
     max-height: 40px !important;
     margin-top: 0;
+  }
+}
+
+/* Footer logo — smaller on mobile */
+.footer-logo {
+  max-height: 30px !important;
+}
+@media (min-width: 768px) {
+  .footer-logo {
+    max-height: 50px !important;
   }
 }
 
