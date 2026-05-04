@@ -61,7 +61,7 @@ export default function BrandPeople() {
   const swiperRef = useRef<SwiperType | null>(null)
 
   return (
-    <section id="testimonials" className="testimonial-section racing-car light-text">
+    <section id="recenzii" className="testimonial-section racing-car light-text">
       <div className="section-background">
         <div className="background-wrapper">
           <div

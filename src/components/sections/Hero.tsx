@@ -31,10 +31,10 @@ export default function Hero() {
             <div className="btn-wrapper">
               <a
                 className="btn btn-primary btn-accent has-icon"
-                href="#contact"
+                href="#dealer"
                 onClick={(e) => {
                   e.preventDefault()
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('dealer')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
                 <span>Contactează-ne</span><i className="fas fa-arrow-right"></i>

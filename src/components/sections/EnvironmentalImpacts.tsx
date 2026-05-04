@@ -49,7 +49,7 @@ const impacts = [
 export default function EnvironmentalImpacts() {
   return (
     <section
-      id="impact"
+      id="avantaje"
       className="gallery-section light-text"
       style={{
         position: 'relative',

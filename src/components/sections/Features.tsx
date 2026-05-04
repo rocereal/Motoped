@@ -89,7 +89,7 @@ export default function Features() {
   }
 
   return (
-    <section id="feature" className="features-section gray-bg" style={{ position: 'relative' }}>
+    <section id="caracteristici" className="features-section gray-bg" style={{ position: 'relative' }}>
       <div className="section-background">
         <div className="background-wrapper">
           <div

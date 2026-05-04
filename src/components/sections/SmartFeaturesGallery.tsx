@@ -62,7 +62,7 @@ export default function SmartFeaturesGallery() {
   }))
 
   return (
-    <section id="gallery" className="technology-section gray-bg">
+    <section id="galerie" className="technology-section gray-bg">
       <div className="container">
         <div className="row">
           <div className="col-md-8 offset-md-2 text-center">

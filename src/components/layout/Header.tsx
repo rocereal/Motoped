@@ -41,12 +41,13 @@ export default function Header() {
           <div className={`col-sm-9 menu-conainer${menuOpen ? ' menu-open' : ''}`}>
             <nav className="site-navigation">
               <ul className="main-menu">
-                <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')}>Despre</a></li>
-                <li><a href="#feature" onClick={(e) => handleNavClick(e, 'feature')}>Caracteristici</a></li>
-                <li><a href="#variation" onClick={(e) => handleNavClick(e, 'variation')}>Culori</a></li>
-                <li><a href="#impact" onClick={(e) => handleNavClick(e, 'impact')}>Avantaje</a></li>
+                <li><a href="#despre" onClick={(e) => handleNavClick(e, 'despre')}>Despre</a></li>
+                <li><a href="#caracteristici" onClick={(e) => handleNavClick(e, 'caracteristici')}>Caracteristici</a></li>
+                <li><a href="#culori" onClick={(e) => handleNavClick(e, 'culori')}>Culori</a></li>
+                <li><a href="#avantaje" onClick={(e) => handleNavClick(e, 'avantaje')}>Avantaje</a></li>
+                <li><a href="#galerie" onClick={(e) => handleNavClick(e, 'galerie')}>Galerie</a></li>
+                <li><a href="#specificatii" onClick={(e) => handleNavClick(e, 'specificatii')}>Specificații</a></li>
                 <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Dealer</a></li>
-                <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a></li>
               </ul>
             </nav>
           </div>

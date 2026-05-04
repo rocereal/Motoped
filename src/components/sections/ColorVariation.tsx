@@ -30,7 +30,7 @@ export default function ColorVariation() {
   const swiperRef = useRef<SwiperType | null>(null)
 
   return (
-    <section id="variation" className="color-section bus-layout" style={{ position: 'relative' }}>
+    <section id="culori" className="color-section bus-layout" style={{ position: 'relative' }}>
       <div className="section-background">
         <div className="background-wrapper">
           <div

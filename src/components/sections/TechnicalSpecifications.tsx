@@ -94,7 +94,7 @@ export default function TechnicalSpecifications() {
   }
 
   return (
-    <section id="specifications" className="specifications-section gray-bg">
+    <section id="specificatii" className="specifications-section gray-bg">
       <div className="section-background">
         <div className="background-wrapper">
           <div

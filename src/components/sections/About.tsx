@@ -2,7 +2,7 @@
 
 export default function About() {
   return (
-    <section id="about" className="about-section mb-5">
+    <section id="despre" className="about-section mb-5">
       <div className="container">
         <div className="row align-items-center bicycle-img">
           <div className="col-md-6">
@@ -29,11 +29,11 @@ export default function About() {
             </div>
             <div className="btn-wrapper">
               <a
-                href="#contact"
+                href="#dealer"
                 className="btn btn-primary has-icon"
                 onClick={(e) => {
                   e.preventDefault()
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('dealer')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
                 <span>Află mai multe</span>

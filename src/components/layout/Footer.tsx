@@ -26,12 +26,13 @@ export default function Footer() {
                 </div>
                 <div className="widget-contet footer-menu">
                   <ul className="menu">
-                    <li><a href="#about">Despre</a></li>
-                    <li><a href="#feature">Caracteristici</a></li>
-                    <li><a href="#variation">Culori</a></li>
-                    <li><a href="#impact">Avantaje</a></li>
+                    <li><a href="#despre">Despre</a></li>
+                    <li><a href="#caracteristici">Caracteristici</a></li>
+                    <li><a href="#culori">Culori</a></li>
+                    <li><a href="#avantaje">Avantaje</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#specificatii">Specificații</a></li>
                     <li><a href="#dealer">Dealer</a></li>
-                    <li><a href="#contact">Contact</a></li>
                   </ul>
                 </div>
               </div>
@@ -52,9 +53,18 @@ export default function Footer() {
                     <h3>Email</h3>
                     <span><a href="mailto:contact@motoped.ro">contact@motoped.ro</a></span>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-6">
+              <div className="widget">
+                <div className="widget-heading">
+                  <h4 className="widget-title">Adrese</h4>
+                </div>
+                <div className="widget-contet contact-info">
                   <div className="widget-contact-info">
                     <i className="fas fa-map-marker-alt"></i>
-                    <h3>Adresă</h3>
+                    <h3>Sibiu</h3>
                     <span>
                       Nod Rutier Vestem<br />
                       Șoseaua Sibiului 296, Sibiu<br />
@@ -63,27 +73,12 @@ export default function Footer() {
                   </div>
                   <div className="widget-contact-info">
                     <i className="fas fa-map-marker-alt"></i>
-                    <h3>Adresă</h3>
+                    <h3>Lunguletu</h3>
                     <span>
                       Strada Principală, DN7<br />
                       Lunguletu<br />
                       <em>(Vizavi de Piață)</em>
                     </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="widget">
-                <div className="widget-heading">
-                  <h4 className="widget-title">Abonează-te</h4>
-                </div>
-                <div className="widget-contet">
-                  <div className="newsletter-box">
-                    <form method="post">
-                      <input type="email" name="email" placeholder="Adresa ta de email" required autoComplete="off" className="form-control" />
-                      <button type="submit" className="signup-btn">Abonează-te</button>
-                    </form>
                   </div>
                 </div>
               </div>
