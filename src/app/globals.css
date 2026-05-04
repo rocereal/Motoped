@@ -4,6 +4,14 @@
 @import 'swiper/css/pagination';
 
 /* Custom overrides for React components */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset anchor scroll for fixed header */
+section[id] {
+  scroll-margin-top: 70px;
+}
 
 /* Swiper integration with template styles */
 .swiper-color-variation {
