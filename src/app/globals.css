@@ -79,6 +79,17 @@ html {
   }
 }
 
+/* Gallery — uniform image height */
+.st-gallery li a {
+  height: 220px;
+}
+.st-gallery li a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Footer logo — smaller on mobile */
 .footer-logo {
   max-height: 30px !important;
