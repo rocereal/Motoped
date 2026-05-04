@@ -4,9 +4,6 @@
 @import 'swiper/css/pagination';
 
 /* Custom overrides for React components */
-html {
-  scroll-behavior: smooth;
-}
 
 /* Swiper integration with template styles */
 .swiper-color-variation {

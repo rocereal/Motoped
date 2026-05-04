@@ -32,6 +32,12 @@ export default function Hero() {
               <a
                 className="btn btn-primary btn-accent has-icon"
                 href="#dealer"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const el = document.getElementById('dealer')
+                  if (!el) return
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset, behavior: 'smooth' })
+                }}
               >
                 <span>Contactează-ne</span><i className="fas fa-arrow-right"></i>
               </a>
