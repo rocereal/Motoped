@@ -2,8 +2,16 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Wheels - E-Bike SS-100',
-  description: 'Smart & Connected E-BIKE SS-100 - Power Packed Electric Performance',
+  title: 'NIEVE Q-EN | Mașină Electrică 100% | Motoped.ro',
+  description: 'NIEVE Q-EN — mașina electrică compactă de 2 locuri, perfectă pentru oraș. Zero emisii, autonomie 90–120 km, încărcare la orice priză. Dealer autorizat în Sibiu și Lunguletu. Test drive gratuit!',
+  keywords: 'masina electrica, NIEVE Q-EN, microcar electric, masina electrica Romania, masina electrica Sibiu, masina electrica tineri, permis 16 ani, vehicul electric urban, Motoped',
+  authors: [{ name: 'Motoped.ro' }],
+  openGraph: {
+    title: 'NIEVE Q-EN | Mașină Electrică 100% | Motoped.ro',
+    description: 'Mașina electrică compactă de 2 locuri ideală pentru oraș. Autonomie 90–120 km, încărcare la orice priză, preț accesibil. Dealer autorizat NIEVE în România.',
+    locale: 'ro_RO',
+    type: 'website',
+  },
   icons: { icon: '/images/favicon.ico' },
 }
 
@@ -13,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="ro">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" />
