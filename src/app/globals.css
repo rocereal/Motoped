@@ -45,6 +45,21 @@ html {
   }
 }
 
+/* Slow down env-carousel (De ce sa alegi): 27s/3s -> 45s/5s per item */
+.env_carousel__item {
+  animation-duration: 45s !important;
+  -webkit-animation-duration: 45s !important;
+}
+.env_carousel__item:nth-child(1) { animation-delay: calc(5s * -1) !important; -webkit-animation-delay: calc(5s * -1) !important; }
+.env_carousel__item:nth-child(2) { animation-delay: calc(5s * 0)  !important; -webkit-animation-delay: calc(5s * 0)  !important; }
+.env_carousel__item:nth-child(3) { animation-delay: calc(5s * 1)  !important; -webkit-animation-delay: calc(5s * 1)  !important; }
+.env_carousel__item:nth-child(4) { animation-delay: calc(5s * 2)  !important; -webkit-animation-delay: calc(5s * 2)  !important; }
+.env_carousel__item:nth-child(5) { animation-delay: calc(5s * 3)  !important; -webkit-animation-delay: calc(5s * 3)  !important; }
+.env_carousel__item:nth-child(6) { animation-delay: calc(5s * 4)  !important; -webkit-animation-delay: calc(5s * 4)  !important; }
+.env_carousel__item:nth-child(7) { animation-delay: calc(5s * 5)  !important; -webkit-animation-delay: calc(5s * 5)  !important; }
+.env_carousel__item:nth-child(8) { animation-delay: calc(5s * 6)  !important; -webkit-animation-delay: calc(5s * 6)  !important; }
+.env_carousel__item:last-child   { animation-delay: calc(-5s * 2) !important; -webkit-animation-delay: calc(-5s * 2) !important; }
+
 /* Logo size */
 .main-header .logo img {
   max-height: 35px !important;

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 
 const testimonials = [
@@ -91,7 +92,9 @@ export default function BrandPeople() {
             <div className="testimonial-wrapper">
               <div className="testimonial-slider">
                 <Swiper
+                  modules={[Autoplay]}
                   loop={true}
+                  autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
                   onSwiper={(swiper) => { swiperRef.current = swiper }}
                 >
                   {testimonials.map((t, i) => (
