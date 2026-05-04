@@ -78,20 +78,6 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="widget">
-                <div className="widget-heading">
-                  <h4 className="widget-title">Urmărește-ne</h4>
-                </div>
-                <div className="widget-contet">
-                  <div className="footer-social">
-                    <ul>
-                      <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                      <li><a href="#"><i className="fab fa-instagram"></i></a></li>
-                      <li><a href="#"><i className="fab fa-youtube"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

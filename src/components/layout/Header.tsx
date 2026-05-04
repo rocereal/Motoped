@@ -48,11 +48,6 @@ export default function Header() {
                 <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Dealer</a></li>
                 <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a></li>
               </ul>
-              <ul className="header-social-media">
-                <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i className="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i className="fab fa-youtube"></i></a></li>
-              </ul>
             </nav>
           </div>
         </div>

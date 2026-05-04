@@ -6,18 +6,34 @@ import type { Swiper as SwiperType } from 'swiper'
 
 const testimonials = [
   {
-    img: '/images/person-1.jpg',
-    quote:
-      'NIEVE Q-EN este exact ce aveam nevoie pentru deplasările zilnice prin Sibiu. Consum zero, parcare ușoară și nu mai plătesc combustibil. O investiție care s-a amortizat rapid!',
-    name: 'Andrei Popescu',
-    role: 'Antreprenor, Sibiu',
+    img: '/images/client-1.png',
+    quote: 'Am luat permisul la 16 ani și prima mașină a fost NIEVE Q-EN. E perfectă pentru școală și ieșiri cu prietenii. O încarc acasă peste noapte și dimineața e gata — nu mai cer bani de benzină!',
+    name: 'Alexandru M.',
+    role: 'Elev, 16 ani, Cluj',
   },
   {
-    img: '/images/person-1.jpg',
-    quote:
-      'Am testat-o o săptămână înainte de a o cumpăra. Sunt surprins de cât de silențioasă și ușor de condus este. Bateria LiFePO4 îmi dă 100+ km pe o singură încărcare — mai mult decât am nevoie.',
-    name: 'Maria Ionescu',
-    role: 'Medic, Sibiu',
+    img: '/images/client-2.png',
+    quote: 'Nu credeam că voi conduce propria mașină la 17 ani. NIEVE Q-EN e ușor de condus, se parchează oriunde și colegii mei sunt toți curioși de ea. Cea mai bună decizie a familiei mele!',
+    name: 'Ioana D.',
+    role: 'Elevă, 17 ani, Sibiu',
+  },
+  {
+    img: '/images/client-3.png',
+    quote: 'Părinții mei au ales NIEVE Q-EN pentru că e sigură și economică. Eu o iubesc pentru că arată cool și pot merge oriunde în oraș fără să depind de nimeni.',
+    name: 'Mihai T.',
+    role: 'Elev, 16 ani, București',
+  },
+  {
+    img: '/images/client-4.png',
+    quote: 'De când am NIEVE Q-EN merg singură la liceu și la antrenamente. E silențioasă, nu poluează și părinții mei sunt liniștiți că e echipată cu ABS și centură. Win-win!',
+    name: 'Sofia R.',
+    role: 'Elevă, 17 ani, Brașov',
+  },
+  {
+    img: '/images/client-5.png',
+    quote: 'La 16 ani visam la o mașină. NIEVE Q-EN a făcut visul realitate — e accesibilă, nu costă nimic la încărcat și e perfectă pentru orașul nostru. Toți prietenii vor să vină cu mine!',
+    name: 'Radu P.',
+    role: 'Elev, 16 ani, Sibiu',
   },
 ]
 
@@ -64,10 +80,10 @@ export default function BrandPeople() {
         <div className="row">
           <div className="col-md-12">
             <div className="heading-wrapper text-center m-bot-0">
-              <h2 className="large-heading text-uppercase">Ce Spun Clienții</h2>
+              <h2 className="large-heading text-uppercase">Ce Spun Tinerii</h2>
             </div>
             <div className="text-block text-lead text-center">
-              <p>Experiențe reale de la proprietarii NIEVE Q-EN din România.</p>
+              <p>Experiențe reale de la tinerii de 16–17 ani care conduc NIEVE Q-EN în fiecare zi.</p>
             </div>
           </div>
 
