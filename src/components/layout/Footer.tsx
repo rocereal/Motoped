@@ -61,6 +61,15 @@ export default function Footer() {
                       <em>(Lângă benzinăria MOL)</em>
                     </span>
                   </div>
+                  <div className="widget-contact-info">
+                    <i className="fas fa-map-marker-alt"></i>
+                    <h3>Adresă</h3>
+                    <span>
+                      Strada Principală, DN7<br />
+                      Lunguletu<br />
+                      <em>(Vizavi de Piață)</em>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
