@@ -12,7 +12,12 @@ export const metadata: Metadata = {
     locale: 'ro_RO',
     type: 'website',
   },
-  icons: { icon: '/images/favicon.ico' },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+    ],
+  },
 }
 
 export default function RootLayout({
