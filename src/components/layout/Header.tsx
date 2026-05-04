@@ -7,6 +7,7 @@ export default function Header() {
   const [sticky, setSticky] = useState(false)
 
   useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
     const onScroll = () => setSticky(window.scrollY > 80)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
