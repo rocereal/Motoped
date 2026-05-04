@@ -12,6 +12,15 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const setAppHeight = () => {
+      document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
+    }
+    setAppHeight()
+    window.addEventListener('resize', setAppHeight)
+    return () => window.removeEventListener('resize', setAppHeight)
+  }, [])
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     setMenuOpen(false)

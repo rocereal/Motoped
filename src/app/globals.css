@@ -27,10 +27,10 @@ html {
   display: block !important;
 }
 
-/* Fix iOS Safari: 100vh excludes browser chrome, dvh accounts for it */
-@supports (height: 100dvh) {
+/* Fix iOS Safari: use JS-set --app-height (window.innerHeight) instead of 100vh */
+@media (max-width: 991px) {
   .site-navigation {
-    height: 100dvh !important;
+    height: var(--app-height, 100vh) !important;
   }
 }
 
