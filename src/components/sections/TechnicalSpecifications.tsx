@@ -14,7 +14,7 @@ const tabs = [
       ['Tensiune', '64V'],
       ['Cuplu Maxim', '175 Nm'],
       ['Pantă Maximă', '21%'],
-      ['Viteză Maximă', '45 km/h'],
+      ['Viteză Maximă', '25 km/h'],
     ],
   },
   {

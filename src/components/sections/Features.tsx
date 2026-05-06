@@ -33,8 +33,8 @@ const features = [
   },
   {
     icon: '/images/svg/speed.svg',
-    label: 'Viteză 45 km/h',
-    text: 'Viteza maximă de 45 km/h este optimizată pentru mobilitate urbană. Ideală pentru deplasări în oraș fără nicio restricție de circulație, cu costuri de asigurare și întreținere semnificativ mai mici.',
+    label: 'Viteză 25 km/h',
+    text: 'Viteza maximă de 25 km/h este optimizată pentru mobilitate urbană. Ideală pentru deplasări în oraș fără nicio restricție de circulație, cu costuri de asigurare și întreținere semnificativ mai mici.',
     blockClass: 'block5',
     iconClass: 'icon icon5',
   },
