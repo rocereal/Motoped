@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { fireTrackingEvent } from '@/lib/client-tracking'
 
-const WHATSAPP_PHONE = '40376060045'
+const WHATSAPP_PHONE = '40724547086'
 const WHATSAPP_URL   = `https://wa.me/${WHATSAPP_PHONE}`
 const PRODUCT        = process.env.NEXT_PUBLIC_PRODUCT_NAME ?? 'NIEVE Q-EN'
 

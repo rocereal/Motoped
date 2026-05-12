@@ -113,8 +113,8 @@ export default function DealerFinder() {
                 </div>
                 <div>
                   <p style={{ margin: 0, fontWeight: 600, fontFamily: "'Poppins', sans-serif", fontSize: 15 }}>Telefon</p>
-                  <PhoneLink href="tel:+40376060045" style={{ color: '#555', fontSize: 14, textDecoration: 'none' }}>
-                    +0376 060 045
+                  <PhoneLink href="tel:+40377104279" style={{ color: '#555', fontSize: 14, textDecoration: 'none' }}>
+                    0377 104 279
                   </PhoneLink>
                 </div>
               </div>
@@ -209,7 +209,7 @@ export default function DealerFinder() {
                     {status === 'error' && (
                       <p style={{ color: '#dd0606', fontSize: 13, marginBottom: 10 }}>
                         A apărut o eroare. Încearcă din nou sau sună la{' '}
-                        <a href="tel:+40376060045" style={{ color: '#dd0606' }}>+0376 060 045</a>.
+                        <a href="tel:+40377104279" style={{ color: '#dd0606' }}>0377 104 279</a>.
                       </p>
                     )}
                     <button

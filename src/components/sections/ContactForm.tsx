@@ -169,7 +169,7 @@ export default function ContactForm() {
                     {status === 'error' && (
                       <p style={{ color: '#dd0606', fontSize: 13, marginBottom: 12 }}>
                         A apărut o eroare. Încearcă din nou sau sună la{' '}
-                        <a href="tel:+40376060045" style={{ color: '#dd0606' }}>+0376 060 045</a>.
+                        <a href="tel:+40377104279" style={{ color: '#dd0606' }}>0377 104 279</a>.
                       </p>
                     )}
                     <button
