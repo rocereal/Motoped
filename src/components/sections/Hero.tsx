@@ -28,6 +28,19 @@ export default function Hero() {
                 doar mobilitate modernă și accesibilă.
               </p>
             </div>
+            <div style={{ margin: '24px 0 20px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#fff', fontFamily: "'Poppins', sans-serif", lineHeight: 1 }}>
+                  24.900 lei
+                </span>
+                <span style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.55)', textDecoration: 'line-through', fontFamily: "'Poppins', sans-serif" }}>
+                  29.000 lei
+                </span>
+              </div>
+              <p style={{ margin: '6px 0 0', fontSize: '0.9rem', color: 'rgba(255,255,255,0.75)', fontFamily: "'Poppins', sans-serif" }}>
+                Posibilitate rate de la <strong style={{ color: '#fff' }}>486 lei/lună</strong> timp de 5 ani
+              </p>
+            </div>
             <div className="btn-wrapper">
               <a
                 className="btn btn-primary btn-accent has-icon"
