@@ -28,8 +28,8 @@ export default function Hero() {
                 doar mobilitate modernă și accesibilă.
               </p>
             </div>
-            <div style={{ margin: '24px 0 20px' }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ margin: '24px 0 20px', textAlign: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
                 <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#fff', fontFamily: "'Poppins', sans-serif", lineHeight: 1 }}>
                   24.900 lei
                 </span>
