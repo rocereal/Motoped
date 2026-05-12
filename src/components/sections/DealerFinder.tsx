@@ -1,3 +1,5 @@
+import PhoneLink from '@/components/ui/PhoneLink'
+
 const iconStyle: React.CSSProperties = {
   width: 40, height: 40, borderRadius: '50%',
   background: '#dd0606',
@@ -43,9 +45,9 @@ export default function DealerFinder() {
             </div>
             <div>
               <p style={{ margin: 0, fontWeight: 600, fontFamily: "'Poppins', sans-serif", fontSize: 15 }}>Telefon</p>
-              <a href="tel:+40376060045" style={{ color: '#555', fontSize: 14, textDecoration: 'none' }}>
+              <PhoneLink href="tel:+40376060045" style={{ color: '#555', fontSize: 14, textDecoration: 'none' }}>
                 +0376 060 045
-              </a>
+              </PhoneLink>
             </div>
           </div>
 

@@ -1,3 +1,5 @@
+import PhoneLink from '@/components/ui/PhoneLink'
+
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -46,7 +48,7 @@ export default function Footer() {
                   <div className="widget-contact-info">
                     <i className="fas fa-phone"></i>
                     <h3>Telefon</h3>
-                    <span><a href="tel:+40376060045">+0376 060 045</a></span>
+                    <span><PhoneLink href="tel:+40376060045">+0376 060 045</PhoneLink></span>
                   </div>
                   <div className="widget-contact-info">
                     <i className="fas fa-envelope-open"></i>
