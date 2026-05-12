@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect, useRef } from 'react'
 import { fireTrackingEvent } from '@/lib/client-tracking'
 
 const WHATSAPP_PHONE = '40376060045'
@@ -7,6 +8,21 @@ const WHATSAPP_URL   = `https://wa.me/${WHATSAPP_PHONE}`
 const PRODUCT        = process.env.NEXT_PUBLIC_PRODUCT_NAME ?? 'NIEVE Q-EN'
 
 export default function WhatsAppButton() {
+  const [visible, setVisible] = useState(false)
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    const section = document.getElementById('dealer')
+    if (!section) return
+
+    observerRef.current = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.05 },
+    )
+    observerRef.current.observe(section)
+    return () => observerRef.current?.disconnect()
+  }, [])
+
   const handleClick = () => {
     fireTrackingEvent(
       'WhatsAppClicked',
@@ -14,6 +30,8 @@ export default function WhatsAppButton() {
       { product: PRODUCT },
     )
   }
+
+  if (!visible) return null
 
   return (
     <a
@@ -49,7 +67,6 @@ export default function WhatsAppButton() {
         el.style.boxShadow  = '0 4px 16px rgba(221,6,6,0.45)'
       }}
     >
-      {/* WhatsApp SVG icon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
