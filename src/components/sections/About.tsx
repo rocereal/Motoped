@@ -27,8 +27,8 @@ export default function About() {
                 fără zgomot, fără emisii.
               </p>
             </div>
-            <div style={{ margin: '24px 0 20px', textAlign: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div className="price-block" style={{ margin: '24px 0 20px' }}>
+              <div className="price-row" style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '2.2rem', fontWeight: 800, color: '#dd0606', fontFamily: "'Poppins', sans-serif", lineHeight: 1 }}>
                   24.900 lei
                 </span>

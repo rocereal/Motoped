@@ -13,6 +13,22 @@ section[id] {
   scroll-margin-top: 70px;
 }
 
+/* Price block: centered on mobile, left-aligned on desktop */
+.price-block {
+  text-align: center;
+}
+.price-block .price-row {
+  justify-content: center;
+}
+@media (min-width: 992px) {
+  .price-block {
+    text-align: left;
+  }
+  .price-block .price-row {
+    justify-content: flex-start;
+  }
+}
+
 /* Hero: ensure button column is above the car image on mobile */
 .hero-section .banner-content {
   position: relative;
