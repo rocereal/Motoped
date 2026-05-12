@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import TrackingProvider from '@/components/providers/TrackingProvider'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import './globals.css'
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ''
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <TrackingProvider />
+        <WhatsAppButton />
       </body>
       <Script id="fb-pixel" strategy="afterInteractive">{`
         !function(f,b,e,v,n,t,s)
