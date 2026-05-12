@@ -34,8 +34,7 @@ export default function Footer() {
                     <li><a href="#avantaje">Avantaje</a></li>
                     <li><a href="#galerie">Galerie</a></li>
                     <li><a href="#specificatii">Specificații</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#dealer">Dealer</a></li>
+                    <li><a href="#dealer">Contact</a></li>
                   </ul>
                 </div>
               </div>
