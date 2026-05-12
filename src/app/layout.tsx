@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import TrackingProvider from '@/components/providers/TrackingProvider'
 import './globals.css'
+
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ''
 
 export const metadata: Metadata = {
   title: 'NIEVE Q-EN | Mașină Electrică 100% | Motoped.ro',
@@ -21,11 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ro">
       <head>
@@ -42,7 +41,10 @@ export default function RootLayout({
         <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/responsive.css" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <TrackingProvider />
+      </body>
       <Script id="fb-pixel" strategy="afterInteractive">{`
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -52,12 +54,13 @@ export default function RootLayout({
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window,document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init','1017772094121245');
+        fbq('init','${PIXEL_ID}');
         fbq('track','PageView');
       `}</Script>
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img height="1" width="1" style={{ display: 'none' }}
-          src="https://www.facebook.com/tr?id=1017772094121245&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>

@@ -1,17 +1,22 @@
 'use client'
 
+import { fireTrackingEvent } from '@/lib/client-tracking'
+
 interface Props {
-  href: string
+  href:       string
   className?: string
-  style?: React.CSSProperties
-  children: React.ReactNode
+  style?:     React.CSSProperties
+  children:   React.ReactNode
 }
 
 export default function PhoneLink({ href, className, style, children }: Props) {
   const handleClick = () => {
-    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
-      ;(window as any).fbq('track', 'Lead')
-    }
+    const phone = href.replace('tel:', '').replace(/\s/g, '')
+    fireTrackingEvent(
+      'PhoneCallClicked',
+      { phone },
+      { product: process.env.NEXT_PUBLIC_PRODUCT_NAME ?? 'NIEVE Q-EN' },
+    )
   }
 
   return (
