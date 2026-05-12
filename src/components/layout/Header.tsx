@@ -57,6 +57,7 @@ export default function Header() {
                 <li><a href="#avantaje" onClick={(e) => handleNavClick(e, 'avantaje')}>Avantaje</a></li>
                 <li><a href="#galerie" onClick={(e) => handleNavClick(e, 'galerie')}>Galerie</a></li>
                 <li><a href="#specificatii" onClick={(e) => handleNavClick(e, 'specificatii')}>Specificații</a></li>
+                <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a></li>
                 <li><a href="#dealer" onClick={(e) => handleNavClick(e, 'dealer')}>Dealer</a></li>
               </ul>
             </nav>

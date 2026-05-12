@@ -8,6 +8,7 @@ import ColorVariation from '@/components/sections/ColorVariation'
 import EnvironmentalImpacts from '@/components/sections/EnvironmentalImpacts'
 import TechnicalSpecifications from '@/components/sections/TechnicalSpecifications'
 import BrandPeople from '@/components/sections/BrandPeople'
+import ContactForm from '@/components/sections/ContactForm'
 import DealerFinder from '@/components/sections/DealerFinder'
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
           <EnvironmentalImpacts />
           <TechnicalSpecifications />
           <BrandPeople />
+          <ContactForm />
           <DealerFinder />
         </div>
         <Footer />
