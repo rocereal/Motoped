@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { TRACKING_KEY } from '@/lib/client-tracking'
+import { TRACKING_KEY, getOrCreateSessionId } from '@/lib/client-tracking'
 
 function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null
@@ -27,13 +27,11 @@ export function useTracking() {
     const params = new URLSearchParams(window.location.search)
     const stored = getStorage()
 
-    // UTM params — overwrite on every ad click
     ;['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach((k) => {
       const v = params.get(k)
       if (v) stored[k] = v
     })
 
-    // Facebook campaign params
     const fbParamMap: Record<string, string> = {
       utm_id: 'campaign_id', campaign_id: 'campaign_id',
       adset_id: 'adset_id', ad_id: 'ad_id',
@@ -45,7 +43,6 @@ export function useTracking() {
       if (v) stored[key] = v
     })
 
-    // fbclid → compute fbc and store
     const fbclid = params.get('fbclid')
     if (fbclid) {
       stored.fbclid = fbclid
@@ -57,7 +54,6 @@ export function useTracking() {
       if (fbcCookie && !stored.fbc) stored.fbc = fbcCookie
     }
 
-    // fbp: read existing cookie or generate a new one
     let fbp = getCookie('_fbp')
     if (!fbp) {
       fbp = `fb.1.${Date.now()}.${Math.floor(Math.random() * 1e10)}`
@@ -65,7 +61,6 @@ export function useTracking() {
     }
     stored.fbp = fbp
 
-    // First-visit metadata
     if (!stored.first_seen_at) {
       stored.first_seen_at    = new Date().toISOString()
       stored.landing_page_url = window.location.href
@@ -74,5 +69,34 @@ export function useTracking() {
     stored.last_seen_at = new Date().toISOString()
 
     setStorage(stored)
+
+    // Persist session server-side for call attribution
+    const sessionId = getOrCreateSessionId()
+    const sessionPayload = {
+      session_id:       sessionId,
+      utm_source:       stored.utm_source,
+      utm_medium:       stored.utm_medium,
+      utm_campaign:     stored.utm_campaign,
+      utm_content:      stored.utm_content,
+      utm_term:         stored.utm_term,
+      fbclid:           stored.fbclid,
+      fbp:              stored.fbp,
+      fbc:              stored.fbc,
+      campaign_id:      stored.campaign_id,
+      campaign_name:    stored.campaign_name,
+      adset_id:         stored.adset_id,
+      adset_name:       stored.adset_name,
+      ad_id:            stored.ad_id,
+      ad_name:          stored.ad_name,
+      landing_page_url: stored.landing_page_url,
+      referrer:         stored.referrer,
+    }
+
+    fetch('/api/tracking/session', {
+      method:    'POST',
+      headers:   { 'Content-Type': 'application/json' },
+      keepalive: true,
+      body:      JSON.stringify(sessionPayload),
+    }).catch(() => {/* silently ignore — non-critical */})
   }, [])
 }

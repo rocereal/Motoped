@@ -1,4 +1,5 @@
 export const TRACKING_KEY = 'motoped_tracking_v1'
+export const SESSION_KEY  = 'motoped_session_v1'
 
 export type EventName =
   | 'PhoneCallClicked'
@@ -27,31 +28,47 @@ export function generateUUID(): string {
 
 export function getTracking(): Record<string, string> {
   if (typeof window === 'undefined') return {}
+  try { return JSON.parse(localStorage.getItem(TRACKING_KEY) ?? '{}') } catch { return {} }
+}
+
+/** Returns the persistent session_id, creating one on first call. */
+export function getOrCreateSessionId(): string {
+  if (typeof window === 'undefined') return generateUUID()
   try {
-    return JSON.parse(localStorage.getItem(TRACKING_KEY) ?? '{}')
+    let id = localStorage.getItem(SESSION_KEY)
+    if (!id) {
+      id = generateUUID()
+      localStorage.setItem(SESSION_KEY, id)
+    }
+    return id
   } catch {
-    return {}
+    return generateUUID()
   }
 }
 
+/**
+ * Fire a tracking event for form / WhatsApp interactions.
+ * PhoneCallClicked uses its own path via PhoneLink → /api/tracking/phone-click.
+ */
 export async function fireTrackingEvent(
   eventName: EventName,
   customer:  { name?: string; phone: string; email?: string },
   interest?: { product?: string; message?: string },
 ): Promise<string> {
-  const eventId    = generateUUID()
-  const tracking   = getTracking()
-  const metaEvent  = META_EVENT_MAP[eventName]
+  const eventId   = generateUUID()
+  const tracking  = getTracking()
+  const metaEvent = META_EVENT_MAP[eventName]
 
-  // Browser Pixel — fires with same eventId as CAPI for deduplication
+  // Browser Pixel — same eventId as CAPI for deduplication
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (typeof (window as any).fbq === 'function') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(window as any).fbq('track', metaEvent, {}, { eventID: eventId })
   }
 
-  // Server-side CAPI + Daktela — fire and forget (keepalive survives navigation)
   fetch('/api/daktela/contact', {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method:    'POST',
+    headers:   { 'Content-Type': 'application/json' },
     keepalive: true,
     body: JSON.stringify({
       eventName,
