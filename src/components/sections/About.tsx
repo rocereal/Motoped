@@ -27,20 +27,7 @@ export default function About() {
                 fără zgomot, fără emisii.
               </p>
             </div>
-            <div className="price-block" style={{ margin: '24px 0 20px' }}>
-              <div className="price-row" style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '2.2rem', fontWeight: 800, color: '#dd0606', fontFamily: "'Poppins', sans-serif", lineHeight: 1 }}>
-                  24.900 lei
-                </span>
-                <span style={{ fontSize: '1rem', color: '#999', textDecoration: 'line-through', fontFamily: "'Poppins', sans-serif" }}>
-                  29.000 lei
-                </span>
-              </div>
-              <p style={{ margin: '6px 0 0', fontSize: '0.88rem', color: '#555', fontFamily: "'Poppins', sans-serif" }}>
-                Posibilitate rate de la <strong style={{ color: '#333' }}>486 lei/lună</strong> timp de 5 ani
-              </p>
-            </div>
-            <div className="btn-wrapper">
+<div className="btn-wrapper">
               <a
                 href="#dealer"
                 className="btn btn-primary has-icon"
