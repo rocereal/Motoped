@@ -171,7 +171,7 @@ export default function DealerFinder() {
                 noValidate
                 style={{ padding: '28px 0 24px' }}
               >
-                <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: 14, color: '#333', marginBottom: 18, textAlign: 'center' }}>
+                <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: 14, color: '#333', marginBottom: 18 }}>
                   Solicită o ofertă — te contactăm în cel mai scurt timp.
                 </p>
 
