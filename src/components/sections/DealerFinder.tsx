@@ -138,8 +138,8 @@ export default function DealerFinder() {
           <div className="col-lg-7 col-md-12">
             {status === 'success' ? (
               <div style={{
-                background: '#fff', borderRadius: 10, padding: '36px 28px',
-                textAlign: 'center', boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
+                padding: '36px 28px',
+                textAlign: 'center',
               }}>
                 <div style={{
                   width: 56, height: 56, borderRadius: '50%', background: '#dd0606',
@@ -169,8 +169,7 @@ export default function DealerFinder() {
                 onSubmit={handleSubmit}
                 noValidate
                 style={{
-                  background: '#fff', borderRadius: 10, padding: '28px 28px 24px',
-                  boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
+                  padding: '28px 0 24px',
                 }}
               >
                 <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: 14, color: '#333', marginBottom: 18 }}>
