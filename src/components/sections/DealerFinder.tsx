@@ -136,6 +136,7 @@ export default function DealerFinder() {
 
           {/* Right: lead form */}
           <div className="col-lg-7 col-md-12">
+            <div style={{ maxWidth: 480, margin: '0 auto' }}>
             {status === 'success' ? (
               <div style={{
                 padding: '36px 28px',
@@ -168,11 +169,9 @@ export default function DealerFinder() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                style={{
-                  padding: '28px 0 24px',
-                }}
+                style={{ padding: '28px 0 24px' }}
               >
-                <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: 14, color: '#333', marginBottom: 18 }}>
+                <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600, fontSize: 14, color: '#333', marginBottom: 18, textAlign: 'center' }}>
                   Solicită o ofertă — te contactăm în cel mai scurt timp.
                 </p>
 
@@ -205,7 +204,7 @@ export default function DealerFinder() {
                       placeholder="Test drive, culori disponibile, finanțare..."
                       rows={3} style={{ ...inputStyle, resize: 'vertical', minHeight: 90 }} />
                   </div>
-                  <div className="col-12">
+                  <div className="col-12" style={{ textAlign: 'center' }}>
                     {status === 'error' && (
                       <p style={{ color: '#dd0606', fontSize: 13, marginBottom: 10 }}>
                         A apărut o eroare. Încearcă din nou sau sună la{' '}
@@ -227,6 +226,7 @@ export default function DealerFinder() {
                 </div>
               </form>
             )}
+            </div>
           </div>
 
         </div>
