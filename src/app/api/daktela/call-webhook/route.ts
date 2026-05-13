@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     buildLeadCAPIEvent({
       eventName:    'Contact',
       eventId,
-      phone:        caller_number,
+      phone:        caller_number ?? undefined,
       tracking:     {
         fbp, fbc,
         landing_page_url: landingUrl,
@@ -103,15 +103,15 @@ export async function POST(req: NextRequest) {
   // 4. Persist call record
   const storedCall: StoredCall = {
     activity_id,
-    activity_type,
-    activity_action,
-    caller_number,
-    called_number,
-    started_at,
-    ended_at:     ended_at || undefined,
-    direction,
+    activity_type:   activity_type   ?? undefined,
+    activity_action: activity_action ?? undefined,
+    caller_number:   caller_number   ?? undefined,
+    called_number:   called_number   ?? undefined,
+    started_at:      started_at      ?? undefined,
+    ended_at:        ended_at        ?? undefined,
+    direction:       direction       ?? undefined,
     duration,
-    user,
+    user:            user            ?? undefined,
     queue,
     attribution:  attribution ?? undefined,
     processed_at: new Date().toISOString(),

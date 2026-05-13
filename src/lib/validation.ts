@@ -76,16 +76,19 @@ export const PhoneClickPayloadSchema = z.object({
 // /api/daktela/call-webhook
 export const DaktelaCallWebhookSchema = z.object({
   activity_id:     z.string().min(1),
-  activity_type:   z.string().optional(),
-  activity_action: z.string().optional(),
-  caller_number:   z.string().optional().or(z.null()).transform(v => v ?? undefined),
-  called_number:   z.string().optional().or(z.null()).transform(v => v ?? undefined),
-  direction:       z.string().optional(),
-  duration:        z.union([z.string(), z.number()]).optional().transform(v => v !== undefined ? Number(v) : undefined),
-  started_at:      z.string().optional().or(z.null()).transform(v => v ?? undefined),
-  ended_at:        z.string().optional().or(z.null()).transform(v => v ?? undefined),
-  queue:           z.string().optional().or(z.null()).transform(v => v ?? undefined),
-  user:            z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  activity_type:   z.string().nullish(),
+  activity_action: z.string().nullish(),
+  caller_number:   z.string().nullish(),
+  called_number:   z.string().nullish(),
+  direction:       z.string().nullish(),
+  duration:        z.union([z.string(), z.number()]).nullish().transform(v =>
+                     v != null && v !== '' ? Number(v) : undefined),
+  started_at:      z.string().nullish(),
+  ended_at:        z.string().nullish(),
+  queue:           z.union([z.string(), z.number()]).nullish().transform(v =>
+                     v != null && v !== '' ? String(v) : undefined),
+  user:            z.union([z.string(), z.number()]).nullish().transform(v =>
+                     v != null && v !== '' ? String(v) : undefined),
 })
 
 // /api/meta/offline-conversion
