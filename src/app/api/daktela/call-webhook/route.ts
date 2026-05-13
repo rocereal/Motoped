@@ -200,34 +200,34 @@ export async function POST(req: NextRequest) {
     console.error('[Daktela Webhook] Upsert failed:', err.message)
   })
 
-  // ── Meta CAPI — only when FB attribution data present ────────────────────
-  if (attribution?.fbp || attribution?.fbc || attribution?.fbclid) {
-    await sendCAPIEvent(
-      buildLeadCAPIEvent({
-        eventName:    'Contact',
-        eventId:      activity_id,
-        phone:        caller_number,
-        tracking: {
-          campaign_name:    attribution.campaign_name,
-          adset_name:       attribution.adset_name,
-          ad_name:          attribution.ad_name,
-          campaign_id:      attribution.campaign_id,
-          adset_id:         attribution.adset_id,
-          ad_id:            attribution.ad_id,
-          fbclid:           attribution.fbclid,
-          fbp:              attribution.fbp,
-          fbc:              attribution.fbc,
-          landing_page_url: attribution.landing_page_url,
-        },
-        sourceUrl:    attribution.landing_page_url,
-        actionSource: 'phone_call',
-      }),
-    ).then(() => {
-      console.log(`[Daktela Webhook] Meta CAPI Contact sent for activity=${activity_id}`)
-    }).catch((err: Error) => {
-      console.error('[Daktela Webhook] Meta CAPI failed:', err.message)
-    })
-  }
+  // ── Meta CAPI — always sent, even without fbp/fbc/fbclid ────────────────
+  // Phone hash alone is valuable: Custom Audiences, Lookalike Audiences,
+  // and future attribution even when the browser cookie is absent.
+  await sendCAPIEvent(
+    buildLeadCAPIEvent({
+      eventName:    'Contact',
+      eventId:      activity_id,
+      phone:        caller_number,
+      tracking: {
+        campaign_name:    attribution?.campaign_name,
+        adset_name:       attribution?.adset_name,
+        ad_name:          attribution?.ad_name,
+        campaign_id:      attribution?.campaign_id,
+        adset_id:         attribution?.adset_id,
+        ad_id:            attribution?.ad_id,
+        fbclid:           attribution?.fbclid,
+        fbp:              attribution?.fbp,
+        fbc:              attribution?.fbc,
+        landing_page_url: attribution?.landing_page_url,
+      },
+      sourceUrl:    attribution?.landing_page_url,
+      actionSource: 'phone_call',
+    }),
+  ).then(() => {
+    console.log(`[Daktela Webhook] Meta CAPI Contact sent for activity=${activity_id}`)
+  }).catch((err: Error) => {
+    console.error('[Daktela Webhook] Meta CAPI failed:', err.message)
+  })
 
   return NextResponse.json({ ok: true, activity_id, attributed: !!attribution }, { headers: corsHeaders() })
 }
