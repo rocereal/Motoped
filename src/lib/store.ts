@@ -1,17 +1,47 @@
 /**
- * KV store abstraction
+ * KV store abstraction — backed by Neon PostgreSQL
  *
- * Production: Upstash Redis REST API
- *   Env vars: KV_REST_API_URL + KV_REST_API_TOKEN
- *   (Vercel KV sets these automatically when you connect a KV database)
+ * Env var: DATABASE_URL (Neon connection string with pooling enabled)
  *
- * Dev / fallback: in-memory Map — NOT persisted across cold starts
+ * Falls back to in-memory Map when DATABASE_URL is not set (local dev only —
+ * data is NOT shared between serverless function invocations).
+ *
+ * Table (auto-created on first use):
+ *   kv_store(key TEXT PK, value TEXT, expires_at TIMESTAMPTZ)
+ *
+ * List operations (klpush/klrange) store values as JSON arrays in the same table.
  */
 
-const KV_URL   = process.env.KV_REST_API_URL
-const KV_TOKEN = process.env.KV_REST_API_TOKEN
+import { neon } from '@neondatabase/serverless'
+import type { NeonQueryFunction } from '@neondatabase/serverless'
 
-// ── In-memory fallback ────────────────────────────────────────────────────────
+// ── Neon client ───────────────────────────────────────────────────────────────
+
+let _sql: NeonQueryFunction<false, false> | null = null
+let _tableReady = false
+
+function getSql(): NeonQueryFunction<false, false> | null {
+  const url = process.env.DATABASE_URL
+  if (!url) return null
+  if (!_sql) _sql = neon(url)
+  return _sql
+}
+
+async function ensureTable(): Promise<void> {
+  if (_tableReady) return
+  const sql = getSql()
+  if (!sql) return
+  await sql`
+    CREATE TABLE IF NOT EXISTS kv_store (
+      key        TEXT PRIMARY KEY,
+      value      TEXT        NOT NULL,
+      expires_at TIMESTAMPTZ
+    )
+  `
+  _tableReady = true
+}
+
+// ── In-memory fallback (local dev) ────────────────────────────────────────────
 
 interface MemEntry { v: string; exp: number }
 const mem = new Map<string, MemEntry>()
@@ -23,86 +53,94 @@ function memGet(key: string): string | null {
   return e.v
 }
 
-function memSet(key: string, value: string, ttl: number): void {
-  mem.set(key, { v: value, exp: Date.now() + ttl * 1000 })
+function memSet(key: string, value: string, ttlSeconds: number): void {
+  mem.set(key, { v: value, exp: Date.now() + ttlSeconds * 1000 })
 }
 
 function memDel(key: string): void { mem.delete(key) }
 
-function memLrange(key: string, start: number, stop: number): string[] {
-  const raw = memGet(key)
-  if (!raw) return []
-  const arr: string[] = JSON.parse(raw)
-  const end = stop === -1 ? arr.length : stop + 1
-  return arr.slice(start, end)
-}
-
-function memLpush(key: string, value: string, ttl: number): void {
+function memLpush(key: string, value: string, ttlSeconds: number): void {
   const raw = memGet(key)
   const arr: string[] = raw ? JSON.parse(raw) : []
   arr.unshift(value)
-  memSet(key, JSON.stringify(arr), ttl)
+  memSet(key, JSON.stringify(arr), ttlSeconds)
 }
 
-// ── Upstash REST ──────────────────────────────────────────────────────────────
-
-async function kvExec(command: unknown[]): Promise<unknown> {
-  const res = await fetch(KV_URL!, {
-    method:  'POST',
-    headers: {
-      Authorization:  `Bearer ${KV_TOKEN!}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(command),
-  })
-  const json = (await res.json()) as { result: unknown; error?: string }
-  if (json.error) throw new Error(`KV error: ${json.error}`)
-  return json.result
+function memLrange(key: string, limit: number): string[] {
+  const raw = memGet(key)
+  if (!raw) return []
+  return (JSON.parse(raw) as string[]).slice(0, limit)
 }
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
 export function isKvAvailable(): boolean {
-  return !!(KV_URL && KV_TOKEN)
+  return !!process.env.DATABASE_URL
 }
 
 const DEFAULT_TTL = 30 * 24 * 3600  // 30 days
 
-export async function kset(key: string, value: string, ttl = DEFAULT_TTL): Promise<void> {
-  if (isKvAvailable()) {
-    await kvExec(['SET', key, value, 'EX', String(ttl)])
-  } else {
-    memSet(key, value, ttl)
-  }
+export async function kset(key: string, value: string, ttlSeconds = DEFAULT_TTL): Promise<void> {
+  const sql = getSql()
+  if (!sql) { memSet(key, value, ttlSeconds); return }
+  await ensureTable()
+  await sql`
+    INSERT INTO kv_store (key, value, expires_at)
+    VALUES (${key}, ${value}, NOW() + (${ttlSeconds} * interval '1 second'))
+    ON CONFLICT (key) DO UPDATE
+      SET value      = EXCLUDED.value,
+          expires_at = EXCLUDED.expires_at
+  `
 }
 
 export async function kget(key: string): Promise<string | null> {
-  if (isKvAvailable()) {
-    return (await kvExec(['GET', key])) as string | null
-  }
-  return memGet(key)
+  const sql = getSql()
+  if (!sql) return memGet(key)
+  await ensureTable()
+  const rows = await sql`
+    SELECT value FROM kv_store
+    WHERE key = ${key}
+      AND (expires_at IS NULL OR expires_at > NOW())
+  `
+  return (rows[0]?.value as string) ?? null
 }
 
 export async function kdel(key: string): Promise<void> {
-  if (isKvAvailable()) {
-    await kvExec(['DEL', key])
-  } else {
-    memDel(key)
-  }
+  const sql = getSql()
+  if (!sql) { memDel(key); return }
+  await ensureTable()
+  await sql`DELETE FROM kv_store WHERE key = ${key}`
 }
 
-export async function klpush(key: string, value: string, ttl = DEFAULT_TTL): Promise<void> {
-  if (isKvAvailable()) {
-    await kvExec(['LPUSH', key, value])
-    await kvExec(['EXPIRE', key, String(ttl)])
-  } else {
-    memLpush(key, value, ttl)
-  }
+export async function klpush(key: string, value: string, ttlSeconds = DEFAULT_TTL): Promise<void> {
+  const sql = getSql()
+  if (!sql) { memLpush(key, value, ttlSeconds); return }
+  await ensureTable()
+  const rows = await sql`
+    SELECT value FROM kv_store
+    WHERE key = ${key}
+      AND (expires_at IS NULL OR expires_at > NOW())
+  `
+  const current: string[] = rows[0]?.value ? JSON.parse(rows[0].value as string) : []
+  current.unshift(value)
+  await sql`
+    INSERT INTO kv_store (key, value, expires_at)
+    VALUES (${key}, ${JSON.stringify(current)}, NOW() + (${ttlSeconds} * interval '1 second'))
+    ON CONFLICT (key) DO UPDATE
+      SET value      = EXCLUDED.value,
+          expires_at = EXCLUDED.expires_at
+  `
 }
 
 export async function klrange(key: string, limit = 200): Promise<string[]> {
-  if (isKvAvailable()) {
-    return (await kvExec(['LRANGE', key, '0', String(limit - 1)])) as string[]
-  }
-  return memLrange(key, 0, limit - 1)
+  const sql = getSql()
+  if (!sql) return memLrange(key, limit)
+  await ensureTable()
+  const rows = await sql`
+    SELECT value FROM kv_store
+    WHERE key = ${key}
+      AND (expires_at IS NULL OR expires_at > NOW())
+  `
+  if (!rows[0]?.value) return []
+  return (JSON.parse(rows[0].value as string) as string[]).slice(0, limit)
 }
