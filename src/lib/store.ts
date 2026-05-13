@@ -31,13 +31,20 @@ async function ensureTable(): Promise<void> {
   if (_tableReady) return
   const sql = getSql()
   if (!sql) return
-  await sql`
-    CREATE TABLE IF NOT EXISTS kv_store (
-      key        TEXT PRIMARY KEY,
-      value      TEXT        NOT NULL,
-      expires_at TIMESTAMPTZ
-    )
-  `
+  try {
+    await sql`
+      CREATE TABLE IF NOT EXISTS kv_store (
+        key        TEXT PRIMARY KEY,
+        value      TEXT        NOT NULL,
+        expires_at TIMESTAMPTZ
+      )
+    `
+  } catch (err) {
+    // Two cold-start invocations can race on CREATE TABLE at the Postgres catalog
+    // level even with IF NOT EXISTS. If the table already exists, proceed normally.
+    const msg = (err as Error).message ?? ''
+    if (!msg.includes('already exists') && !msg.includes('duplicate key')) throw err
+  }
   _tableReady = true
 }
 
