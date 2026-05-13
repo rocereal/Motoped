@@ -75,16 +75,17 @@ export const PhoneClickPayloadSchema = z.object({
 
 // /api/daktela/call-webhook
 export const DaktelaCallWebhookSchema = z.object({
-  call_id:       z.string().min(1),
-  caller_number: z.string().min(1),
-  called_number: z.string().min(1),
-  started_at:    z.string().min(1),
-  ended_at:      z.string().optional().or(z.literal('')),
-  direction:     z.string().optional(),
-  status:        z.string().optional(),
-  duration:      z.union([z.string(), z.number()]).optional(),
-  user:          z.string().optional(),
-  queue:         z.string().optional(),
+  activity_id:     z.string().min(1),
+  activity_type:   z.string().optional(),
+  activity_action: z.string().optional(),
+  caller_number:   z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  called_number:   z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  direction:       z.string().optional(),
+  duration:        z.union([z.string(), z.number()]).optional().transform(v => v !== undefined ? Number(v) : undefined),
+  started_at:      z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  ended_at:        z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  queue:           z.string().optional().or(z.null()).transform(v => v ?? undefined),
+  user:            z.string().optional().or(z.null()).transform(v => v ?? undefined),
 })
 
 // /api/meta/offline-conversion

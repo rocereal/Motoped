@@ -18,14 +18,14 @@ function datePart(ts: string): string {
 }
 
 export async function saveCall(call: StoredCall): Promise<void> {
-  await kset(callKey(call.call_id), JSON.stringify(call), CALL_TTL)
-  await klpush(indexKey(datePart(call.started_at)), call.call_id, CALL_TTL)
+  const dateKey = call.started_at ? datePart(call.started_at) : new Date().toISOString().slice(0, 10)
+  await kset(callKey(call.activity_id), JSON.stringify(call), CALL_TTL)
+  await klpush(indexKey(dateKey), call.activity_id, CALL_TTL)
 
   const attr = call.attribution
   console.log(
-    `[CallStore] Saved call_id=${call.call_id}` +
-    ` caller=${call.caller_number}` +
-    ` status=${call.status ?? '—'}` +
+    `[CallStore] Saved activity_id=${call.activity_id}` +
+    ` caller=${call.caller_number ?? '—'}` +
     ` attributed=${attr ? `campaign="${attr.campaign_name ?? '—'}"` : 'no'}`,
   )
 }

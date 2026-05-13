@@ -1,7 +1,7 @@
 /**
  * POST /api/daktela/call-webhook
  *
- * Daktela sends this after a call ends (configure in Daktela → Webhooks → Call Ended).
+ * Daktela sends this after a call ends (queue 1001 workflow trigger).
  *
  * Flow:
  *   1. Validate payload
@@ -10,9 +10,9 @@
  *   4. Send Meta CAPI Contact event (action_source: phone_call)
  *   5. Store call record in KV
  *
- * Daktela webhook payload fields:
- *   call_id, caller_number, called_number, started_at, ended_at,
- *   direction, status, duration, user, queue
+ * Daktela webhook payload fields (queue 1001 template):
+ *   activity_id, activity_type, activity_action, caller_number,
+ *   duration, started_at, ended_at, queue, user
  */
 
 import { NextRequest, NextResponse } from 'next/server'
@@ -53,15 +53,15 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const { call_id, caller_number, called_number, started_at, ended_at, direction, status, duration, user, queue } = parsed.data
+  const { activity_id, activity_type, activity_action, caller_number, called_number, started_at, ended_at, direction, duration, user, queue } = parsed.data
 
   // Respond immediately — never make Daktela wait
-  const response = NextResponse.json({ ok: true, call_id }, { headers: corsHeaders() })
+  const response = NextResponse.json({ ok: true, activity_id }, { headers: corsHeaders() })
 
-  const callTimestamp = parseTimestamp(started_at)
+  const callTimestamp = parseTimestamp(started_at ?? new Date().toISOString())
 
   // 1. Attribution: find the phone click that led to this call
-  const attribution = await attachAttributionToCall(callTimestamp, called_number).catch(() => null)
+  const attribution = await attachAttributionToCall(callTimestamp, called_number ?? '').catch(() => null)
 
   // 2. Resolve tracking for CAPI
   let fbp: string | undefined
@@ -102,14 +102,15 @@ export async function POST(req: NextRequest) {
 
   // 4. Persist call record
   const storedCall: StoredCall = {
-    call_id,
+    activity_id,
+    activity_type,
+    activity_action,
     caller_number,
     called_number,
     started_at,
     ended_at:     ended_at || undefined,
     direction,
-    status,
-    duration:     duration !== undefined ? Number(duration) : undefined,
+    duration,
     user,
     queue,
     attribution:  attribution ?? undefined,
@@ -128,7 +129,7 @@ export async function POST(req: NextRequest) {
       ` delta=${Math.round((attribution.click_to_call_delta_ms ?? 0) / 60000)}min`,
     )
   } else {
-    console.log(`[Daktela] No matching phone click for call_id=${call_id}`)
+    console.log(`[Daktela] No matching phone click for activity_id=${activity_id}`)
   }
 
   return response

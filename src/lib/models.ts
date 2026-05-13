@@ -65,17 +65,18 @@ export interface CallAttribution {
 }
 
 export interface StoredCall {
-  call_id:       string
-  caller_number: string
-  called_number: string
-  started_at:    string
-  ended_at?:     string
-  direction?:    string
-  status?:       string
-  duration?:     number
-  user?:         string
-  queue?:        string
+  activity_id:     string
+  activity_type?:  string
+  activity_action?: string
+  caller_number?:  string
+  called_number?:  string
+  started_at?:     string
+  ended_at?:       string
+  direction?:      string
+  duration?:       number
+  user?:           string
+  queue?:          string
 
-  attribution?:  CallAttribution
-  processed_at:  string
+  attribution?:    CallAttribution
+  processed_at:    string
 }
