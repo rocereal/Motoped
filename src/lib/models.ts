@@ -51,6 +51,11 @@ export interface PhoneClick {
 export interface CallAttribution {
   phone_click_id:          string
   session_id:              string
+  utm_source?:             string
+  utm_medium?:             string
+  utm_campaign?:           string
+  utm_content?:            string
+  utm_term?:               string
   campaign_name?:          string
   adset_name?:             string
   ad_name?:                string
