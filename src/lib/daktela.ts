@@ -14,7 +14,7 @@ function normalisePhone(raw: string): string {
 
 async function daktelaFetch(path: string, method: 'GET' | 'POST' | 'PUT', body?: unknown) {
   const sep = path.includes('?') ? '&' : '?'
-  const url = `${BASE_URL}/external/api/v6${path}${method === 'GET' ? sep + 'accessToken=' + ACCESS_TOKEN : '?accessToken=' + ACCESS_TOKEN}`
+  const url = `${BASE_URL}/api/v6${path}${method === 'GET' ? sep + 'accessToken=' + ACCESS_TOKEN : '?accessToken=' + ACCESS_TOKEN}`
   const res = await fetch(url, {
     method,
     headers: body ? { 'Content-Type': 'application/json' } : undefined,
@@ -57,8 +57,8 @@ function buildPayload(input: UpsertInput) {
   ].filter((l): l is string => l !== null)
 
   return {
-    title: customerName ?? normPhone,
-    tel:   normPhone,
+    title:  customerName ?? normPhone,
+    number: normPhone,
     ...(email && { email }),
     description: descLines.join('\n'),
     customFields: {
@@ -95,7 +95,7 @@ export async function upsertDaktelaContact(input: UpsertInput): Promise<void> {
   try {
     // 1. Search by phone
     const byPhone = await daktelaFetch(
-      `/contacts.json?search[tel]=${encodeURIComponent(normPhone)}`, 'GET',
+      `/contacts.json?search[number]=${encodeURIComponent(normPhone)}`, 'GET',
     )
     if (byPhone?.data?.length > 0) {
       const name = byPhone.data[0].name
