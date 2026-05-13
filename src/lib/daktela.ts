@@ -358,10 +358,11 @@ export async function upsertDaktelaContact(opts: UpsertOptions): Promise<UpsertR
 
   try {
     if (existing) {
-      // Idempotency: skip if this exact activity was already processed
-      const lastActivityId = existing.customFields?.source_activity_id?.[0]
-      if (lastActivityId && lastActivityId === ma.source_activity_id?.[0]) {
-        console.log(`[Daktela] Duplicate activity "${lastActivityId}" — skipping update`)
+      // Idempotency: skip only when this exact activity was already processed (webhook retry).
+      // A different activity_id means a new call → update (last-touch attribution).
+      const existingActivityId = existing.customFields?.source_activity_id?.[0]
+      if (existingActivityId && existingActivityId === opts.eventId) {
+        console.log(`[Daktela] Duplicate activity "${existingActivityId}" — skipping update`)
         return { contact: existing, created: false, skipped: true }
       }
 
