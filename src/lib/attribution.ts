@@ -81,6 +81,11 @@ export async function attachAttributionToCall(
   const attr: CallAttribution = {
     phone_click_id:         click.id,
     session_id:             click.session_id,
+    utm_source:             session?.utm_source,
+    utm_medium:             session?.utm_medium,
+    utm_campaign:           session?.utm_campaign,
+    utm_content:            session?.utm_content,
+    utm_term:               session?.utm_term,
     campaign_name:          click.campaign_name  ?? session?.campaign_name,
     adset_name:             click.adset_name     ?? session?.adset_name,
     ad_name:                click.ad_name        ?? session?.ad_name,
