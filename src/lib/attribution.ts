@@ -6,30 +6,25 @@ function normalizePhone(phone: string): string {
   const digits = phone.replace(/\D/g, '')
   if (digits.startsWith('0040')) return digits.slice(2)
   if (digits.startsWith('40') && digits.length === 11) return digits
-  if (digits.startsWith('0')  && digits.length === 10) return '4' + digits.slice(1)
+  if (digits.startsWith('0') && digits.length === 10)  return '4' + digits.slice(1)
   if (digits.length === 9) return '40' + digits
   return digits
 }
 
 /**
- * Find the PhoneClick closest in time before a Daktela incoming call,
- * searching today and yesterday indices.
- *
- * @param callTimestamp  when the call started
- * @param calledNumber   our phone number the caller dialled
- * @param windowMs       max look-back (default 8h)
- * @param extraClickIds  explicit click IDs to check first
+ * Find the PhoneClick closest in time before a Daktela incoming call.
+ * When calledNumber is null/undefined, matches any clicked phone number.
  */
 export async function findMatchingPhoneClick(
   callTimestamp: Date,
-  calledNumber:  string,
+  calledNumber:  string | null | undefined,
   windowMs = 8 * 60 * 60 * 1000,
   extraClickIds: string[] = [],
 ): Promise<PhoneClick | null> {
-  console.log(`[Attribution] Looking up call at ${callTimestamp.toISOString()} to ${calledNumber}`)
+  console.log(`[Attribution] Looking up call at ${callTimestamp.toISOString()} to ${calledNumber ?? '(any)'}`)
 
   const callTime   = callTimestamp.getTime()
-  const normCalled = normalizePhone(calledNumber)
+  const normCalled = calledNumber ? normalizePhone(calledNumber) : null
 
   const today     = callTimestamp.toISOString().slice(0, 10)
   const yesterday = new Date(callTime - 86400000).toISOString().slice(0, 10)
@@ -47,7 +42,7 @@ export async function findMatchingPhoneClick(
   for (const id of candidates) {
     const click = await getPhoneClick(id)
     if (!click) continue
-    if (normalizePhone(click.clicked_phone_number) !== normCalled) continue
+    if (normCalled && normalizePhone(click.clicked_phone_number) !== normCalled) continue
 
     const clickTime = new Date(click.clicked_at).getTime()
     const delta     = callTime - clickTime
@@ -68,7 +63,7 @@ export async function findMatchingPhoneClick(
 
 export async function attachAttributionToCall(
   callTimestamp: Date,
-  calledNumber:  string,
+  calledNumber:  string | null | undefined,
   extraClickIds: string[] = [],
   windowMs = 8 * 60 * 60 * 1000,
 ): Promise<CallAttribution | null> {
