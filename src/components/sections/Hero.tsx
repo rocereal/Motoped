@@ -38,7 +38,7 @@ export default function Hero() {
                 </span>
               </div>
               <p style={{ margin: '6px 0 0', fontSize: '0.9rem', color: 'rgba(255,255,255,0.75)', fontFamily: "'Poppins', sans-serif" }}>
-                Posibilitate rate de la <strong style={{ color: '#fff' }}>486 lei/lună</strong> timp de 5 ani
+                Posibilitate rate de la <strong style={{ color: '#fff' }}>684 lei/lună</strong> timp de 5 ani
               </p>
             </div>
             <div className="btn-wrapper">
